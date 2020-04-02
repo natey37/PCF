@@ -1,24 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styling/App.css';
+import Nav from './Nav.js'
+import Charge from './Charge.js'
+import Recharge from './Recharge.js'
+import Home from './Home.js'
+import Leaders from './Leaders.js'
+import Feelings from './Feelings.js'
+
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+        <Router>
+        
+          <Switch>
+          
+            
+              <Route exact path="/"
+                render={(props) => <Nav />}
+              />
+              <Route exact path="/home"
+                render={(props) => <Home />}
+              />
+              <Route exact path="/charge"
+                render={(props) => <Charge />}
+              />
+              <Route exact path="/recharge"
+                render={(props) => <Recharge />}
+              />
+              <Route exact path="/feelings"
+                render={(props) => <Feelings />}
+              />
+              <Route exact path="/leaders"
+                render={(props) => <Leaders />}
+              />
+            
+            </Switch>
+        </Router>
     </div>
   );
 }

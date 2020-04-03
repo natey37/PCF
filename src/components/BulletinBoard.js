@@ -14,8 +14,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: 800,
-    boxShadow: '5px 10px #888888'
-
+    boxShadow: '5px 10px #888888',
   },
   image: {
     width: 128,

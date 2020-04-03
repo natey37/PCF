@@ -41,13 +41,15 @@
 
 
 
-.Container {
-    background: #63E2C6 ;
-    overflow-y: scroll;
+/* .Container {
+    background: #63E2C6;
+    max-height: 100vh; 
+    overflow: 'auto'
+    /* overflow-y: scroll; */
 
-}
 
-.Paper {
+
+/* .Paper {
   background: #63E2C6;
-}
+} */
 

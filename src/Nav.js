@@ -158,7 +158,7 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List style={{backgroundColor: '#6EF9F5'}}>
+        <List style={{backgroundColor: '#63E2C6'}}>
           {['Bulletin Board'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
@@ -197,7 +197,7 @@ export default function MiniDrawer() {
         
         <Divider/>
         
-        <List style={{backgroundColor: '#6EF9F5', height:"100vh"}}>
+        <List style={{backgroundColor: '#63E2C6', height:"100vh"}}>
             <br></br>
             {['Feelings'].map((text, index) => (
                 <ListItem button key={text}>

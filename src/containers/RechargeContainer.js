@@ -1,23 +1,20 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
+import RechargeBoard from '../components/RechargeBoard'
 
 class RechargeContainer extends React.Component {
 
     render(){
         return (
-            <div>
-            
-            <Container style={{backgroundColor: '#63E2C6', height:"100vh"}} maxWidth="md">
+            <div style={{height: '100vh'}}>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
 
-                hello from RechargeContainer
-                
+            <RechargeBoard/>                
               
-            </Container>
             </div>
         )
     }

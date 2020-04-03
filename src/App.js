@@ -11,16 +11,11 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: '#2A4494'}}>
       
         <Router>
-        
+          <Nav/>
           <Switch>
-          
-            
-              <Route exact path="/"
-                render={(props) => <Nav />}
-              />
               <Route exact path="/home"
                 render={(props) => <Home />}
               />
@@ -36,7 +31,6 @@ function App() {
               <Route exact path="/leaders"
                 render={(props) => <Leaders />}
               />
-            
             </Switch>
         </Router>
     </div>

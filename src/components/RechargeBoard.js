@@ -29,20 +29,20 @@ class RechargeBoard extends React.Component {
             margin: 'auto',
             maxWidth: 700,
             height: '40vh',
-            boxShadow: '5px 5px #888888'
+            boxShadow: '5px 5px #BAAD63'
           }
           const button= {
             height: '40px',
             width: '300px',
             background: 'linear-gradient(45deg, #63E2C6 30%, #2A4494 90%)',
-            boxShadow: '2px 2px #888888'
+            boxShadow: '2px 2px #BAAD63'
 
         }
           const chargeButton= {
             height: '40px',
             width: '150px',
             background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-            boxShadow: '2px 2px #888888'
+            boxShadow: '2px 2px #BAAD63'
           }
           const h3= {
               position: 'absolute',
@@ -53,7 +53,7 @@ class RechargeBoard extends React.Component {
             <div>
                 <Paper style={paper}>
                     <br></br>
-                        <h1>Need To Re-Charge? </h1>
+                        <h1 style={{fontSize: '30px'}}>Need To Re-Charge? </h1>
                         <Button
                             onClick={this.handleClick}
                             variant="contained"
@@ -62,7 +62,7 @@ class RechargeBoard extends React.Component {
                                     
                         >Your personal message awaits!
                         </Button>
-                        {this.state.recharge ? <h4>"Here is your personal message sent to you today!"</h4> : null }
+                        {this.state.recharge ? <h4 style={{paddingLeft: '20px', paddingRight: '20px'}}>"Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today! Here is your personal message sent to you today!"</h4> : null }
 
                         <br></br>
                         <br></br>
@@ -74,7 +74,7 @@ class RechargeBoard extends React.Component {
                 </Paper>
                         <br></br>
                         <div>
-                            <h3 style={{color: 'white'}}>If that gave you the recharge you needed, press the charge button!
+                            <h3 style={{color: 'white'}}>If that helped give you the recharge you needed, press the charge button!
                             </h3>
                             <Button
                                 onClick={this.handleChargeClick}

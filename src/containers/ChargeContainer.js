@@ -13,8 +13,13 @@ class ChargeContainer extends React.Component {
             width: '500px',
             height: '225px',
             backgroundColor: '#FFED87',
-            boxShadow: '5px 5px #888888'
+            boxShadow: '5px 5px #BAAD63'
 
+        }
+        const h3= {
+            position: 'absolute',
+            left: '250px',
+            color: 'white'
         }
       
         return (
@@ -35,6 +40,9 @@ class ChargeContainer extends React.Component {
             </Paper>
                 <br></br>
                 <br></br>
+            <h3 style={h3}>Help us share your positivity with someone who needs it most!</h3>
+            <br></br>
+            <br></br>
             <TagSelector />
            
 

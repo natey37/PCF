@@ -73,7 +73,7 @@ class MessageBoard extends React.Component {
                   margin: 'auto',
                   maxWidth: 800,
                   height: '40vh',
-                  boxShadow: '5px 10px #888888'
+                  boxShadow: '5px 5px #BAAD63'
                 }
         // const useStyles = makeStyles((theme) => ({
         //             button: {
@@ -86,14 +86,14 @@ class MessageBoard extends React.Component {
                     height: '40px',
                     width: '200px',
                     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-
+                    boxShadow: '2px 2px #BAAD63'
                 }
          
         return(
             
             <div>
                 <Paper style={paper} elevation={20}>
-                    <h1>Write Something Positive to Share with a Stranger!</h1>
+                    <h1 style={{paddingTop: '10px', fontSize: '30px'}}>Write something positive to share with a stranger!</h1>
                     <Paper style={message}>
                         <textarea
                             style={style}

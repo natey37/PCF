@@ -9,7 +9,6 @@ import atom from '../styling/atom.png'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    
   },
   paper: {
     padding: theme.spacing(2),
@@ -17,12 +16,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 800,
     boxShadow: '5px 5px #4B7095',
     backgroundColor: '#FAF0E6'
-
   },
-  
   image: {
-    width: 128,
-    height: 128,
+    width: 70,
+    height: 70,
   },
   img: {
     margin: 'auto',
@@ -32,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BulletinBoard() {
+export default function LeaderGrid2() {
   const classes = useStyles();
 
   return (
@@ -44,28 +41,25 @@ export default function BulletinBoard() {
               <img className={classes.img} alt="complex" src={atom} />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
-                  This is the user wrote:
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  YOU ROCK
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  date/time
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  Like
-                </Typography>
-              </Grid>
-            </Grid>
-            {/* <Grid item>
-              <Typography variant="subtitle1">$19.00</Typography>
-            </Grid> */}
+          <Grid item xs={12} sm container >
+             
+             <Grid xs={5}>
+                 <br></br>
+                 <Typography>This is the username</Typography>
+             </Grid>
+            
+             <Grid xs={3}>
+                 <br></br>
+                 <br></br>
+                
+                 <Typography>Charges: 100</Typography>
+             </Grid>
+             <Grid xs={3}>
+                 <br></br>
+                 <br></br>
+                
+                 <Typography>Feelings: 0.75</Typography>
+             </Grid>
           </Grid>
         </Grid>
       </Paper>

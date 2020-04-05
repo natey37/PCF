@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     '& > * + *': {
       marginTop: theme.spacing(3),
     },
-    boxShadow: '5px 5px #888888'
+    boxShadow: '3px 3px #BAAD63'
 
   },
   selector: {
@@ -34,7 +34,7 @@ export default function Tags() {
         id="tags-outlined"
         options={tagOptions}
         getOptionLabel={(option) => option.tag}
-        defaultValue={[tagOptions[1]]}
+        // defaultValue={[tagOptions[1]]}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField

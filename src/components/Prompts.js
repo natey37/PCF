@@ -18,7 +18,7 @@ class Prompts extends React.Component {
             height: '40px',
             width: '300px',
             background: 'linear-gradient(45deg, #63E2C6 30%, #2A4494 90%)',
-
+            boxShadow: '2px 2px #BAAD63'
         }
         return(
 
@@ -32,7 +32,7 @@ class Prompts extends React.Component {
                             
                 >Click for Daily Prompt!
                 </Button>
-                {this.state.showPrompt ? <h4>Tell a story about a time when you made it through a hard time.</h4>: null}
+                {this.state.showPrompt ? <h4>Tell a story about a time when you made it through a hard time. Need to see how long a prompt can be before it looks bad, it can have this many words</h4>: null}
             </div>
         )
     }

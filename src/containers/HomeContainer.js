@@ -69,7 +69,7 @@ class HomeContainer extends React.Component {
                 </div> */}
 
                 <div style={row}>
-}                   <div style={column}>
+                   <div style={column}>
                         <img style={{width: '40px', height: '40px', marginRight: '280px'}} src={pin_flipped} alt="Snow" />
                     </div>
                     <div style={column}>

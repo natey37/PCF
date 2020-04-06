@@ -10,6 +10,9 @@ import atom from '../styling/atom.png'
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 
 import autosize from "autosize";
 import charge from '../styling/charge.png'
@@ -45,13 +48,21 @@ class MessageBoard extends React.Component {
 
     state = {
         message: '',
-        feelings: 'negative'
+        feelings: '', 
+        score: 0,
+        close: false 
     }
 
     componentDidMount() {
         this.textarea.focus();
         autosize(this.textarea);
       }
+
+    setClose = () => {
+        this.setState({
+            close: true 
+        })
+    }
 
     handleMessageChange = (event) => {
         this.setState({
@@ -61,6 +72,9 @@ class MessageBoard extends React.Component {
 
     handleMessageClick = (event) => {
         event.preventDefault()
+        this.setState({
+            close: false
+        })
         fetch('http://localhost:3000/score', { 
             method: "POST", 
             headers: {
@@ -76,12 +90,25 @@ class MessageBoard extends React.Component {
                 alert(resp.errors)
             } else {
                 if(resp.score >= 0.3){
-                    alert("You are a positive Proton! Keep up the charge! \n Here is your sentiment score: " + resp.score )
+                    this.setState({
+                        feelings : 'positive',
+                        score: resp.score
+                   })
+                    // alert("You are a positive Proton! Keep up the charge! \n Here is your sentiment score: " + resp.score )
                 } else if (resp.score >= 0 && resp.score < 0.3) {
-                    alert("You are a neutral Neutron today!")
+                    this.setState({
+                        feelings : 'neutral',
+                        score: resp.score
+
+                   })
+                    // alert("You are a neutral Neutron today!")
                 } else if (resp.score < 0) {
-                   
-                    alert("You are a negative Electron. Please try again with some more positive!")
+                   this.setState({
+                        feelings : 'negative',
+                        score: resp.score
+
+                   })
+                    // alert("You are a negative Electron. Please try again with some more positive!")
                 }
                    
             }
@@ -127,24 +154,41 @@ class MessageBoard extends React.Component {
             verticalAlign: 'middle', 
             zIndex: 1,
             position: 'absolute',
-            left: '50%', 
+            left: '32.8%', 
             right: '50%', 
-            width: '400px',
-            height: '200px',
+            width: '500px',
+            height: '300px',
             marginTop: '150px'
             
         }
 
         return(
             <div>  
-               
-                    {this.state.feelings === 'negative' ? 
+
                     
-                    <Alert style={alert}  severity="success" color="info">
-                        <AlertTitle>You are a negative Electron!</AlertTitle>
-                         Your message had a score of __. Please write something more positive!
+                    {this.state.feelings === 'neutral' && this.state.close === false ? 
+                    
+                    <Alert style={alert}  severity="info" onClose={() => this.setClose()}>
+                        <AlertTitle>You are a neutral Neutron!</AlertTitle>
+                         Your message had a score of {this.state.score}. You're almost there! Keep up the good attitude!
                     </Alert> :
                     null
+                    }
+                    {this.state.feelings === 'positive' && this.state.close === false ? 
+                    
+                        <Alert style={alert}  severity="success" onClose={() => this.setClose()}>
+                            <AlertTitle>You are a positive Proton!</AlertTitle>
+                            Your message had a score of {this.state.score}. You're awesome! Keep up the positive charge!
+                        </Alert> :
+                        null
+                    }
+                    {this.state.feelings === 'negative' && this.state.close === false ? 
+                    
+                        <Alert style={alert}  severity="error" onClose={() => this.setClose()}>
+                            <AlertTitle>You are a negative Electron!</AlertTitle>
+                            Your message had a score of {this.state.score} Please write something more positive!
+                        </Alert> :
+                        null
                     }
             
               

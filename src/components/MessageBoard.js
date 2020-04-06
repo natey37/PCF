@@ -113,7 +113,9 @@ class MessageBoard extends React.Component {
                                user_id: this.state.userID,
                                sent_user_id: this.state.sentUserID, 
                                sentiment_score: this.state.score,
-                               likes: 0
+                               likes: 0, 
+                               message: resp.charge.message
+
                            })
                        })
                     //    .then(resp => resp.json()).then(resp => {console.log(resp)})
@@ -134,7 +136,8 @@ class MessageBoard extends React.Component {
                                 user_id: this.state.userID,
                                 sent_user_id: this.state.sentUserID, 
                                 sentiment_score: this.state.score,
-                                likes: 0
+                                likes: 0,
+                                message: resp.charge.message
                             })
                         })
                    })

@@ -9,7 +9,20 @@ import Grid from '@material-ui/core/Grid';
 
 class HomeContainer extends React.Component {
 
+    state = {
+        messages: [], 
+    }
     
+    componentDidMount(){
+        fetch('http://localhost:3000/sentcharges')
+        .then(resp => resp.json())
+        .then(resp => {
+            console.log(resp)
+            this.setState({
+                messages: resp
+            })
+        })
+    }
 
     render(){
 
@@ -80,9 +93,9 @@ class HomeContainer extends React.Component {
                     </div>
                 </div>
 
-
+                {this.state.messages.map((message, index) => <BulletinBoard key={index}message={message}/>)}
                 {/* <h1 style={{textDecoration: 'underline'}}>Bulletin Board</h1> */}
-                <BulletinBoard/>
+                {/* <BulletinBoard/>
                 <br></br>
                 <BulletinBoard/>
                 <br></br>
@@ -100,7 +113,7 @@ class HomeContainer extends React.Component {
                 <br></br>
                 <BulletinBoard/>
                 <br></br>
-                <BulletinBoard/>
+                <BulletinBoard/> */}
               
             </Container>
             </div>

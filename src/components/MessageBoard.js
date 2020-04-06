@@ -47,10 +47,17 @@ import charge from '../styling/charge.png'
 class MessageBoard extends React.Component {
 
     state = {
+        chargeID: '',
+        userID: 1,
+        sentUserID: 2,
+        score: 0,
+     
+
         message: '',
         feelings: '', 
-        score: 0,
+        
         close: false 
+
     }
 
     componentDidMount() {
@@ -86,29 +93,57 @@ class MessageBoard extends React.Component {
         .then(resp => {
             console.log(resp)
             console.log(resp.score)
+            console.log(resp.charge.id)
             if(resp.errors){
                 alert(resp.errors)
             } else {
                 if(resp.score >= 0.3){
                     this.setState({
                         feelings : 'positive',
-                        score: resp.score
+                        score: resp.score,
+                        chargeID: resp.charge.id
+                   }, () => {
+                       fetch('http://localhost:3000/sentcharges', {
+                           method: "POST", 
+                           headers: {
+                            'Content-Type': 'application/json'
+                        }, 
+                           body: JSON.stringify({
+                               charge_id: this.state.chargeID,
+                               user_id: this.state.userID,
+                               sent_user_id: this.state.sentUserID, 
+                               sentiment_score: this.state.score,
+                               likes: 0
+                           })
+                       })
+                    //    .then(resp => resp.json()).then(resp => {console.log(resp)})
                    })
-                    // alert("You are a positive Proton! Keep up the charge! \n Here is your sentiment score: " + resp.score )
                 } else if (resp.score >= 0 && resp.score < 0.3) {
                     this.setState({
                         feelings : 'neutral',
-                        score: resp.score
-
+                        score: resp.score,
+                        chargeID: resp.charge.id
+                   }, () => {
+                        fetch('http://localhost:3000/sentcharges', {
+                            method: "POST", 
+                            headers: {
+                            'Content-Type': 'application/json'
+                        }, 
+                            body: JSON.stringify({
+                                charge_id: this.state.chargeID,
+                                user_id: this.state.userID,
+                                sent_user_id: this.state.sentUserID, 
+                                sentiment_score: this.state.score,
+                                likes: 0
+                            })
+                        })
                    })
-                    // alert("You are a neutral Neutron today!")
                 } else if (resp.score < 0) {
                    this.setState({
                         feelings : 'negative',
                         score: resp.score
 
                    })
-                    // alert("You are a negative Electron. Please try again with some more positive!")
                 }
                    
             }
@@ -186,7 +221,7 @@ class MessageBoard extends React.Component {
                     
                         <Alert style={alert}  severity="error" onClose={() => this.setClose()}>
                             <AlertTitle>You are a negative Electron!</AlertTitle>
-                            Your message had a score of {this.state.score} Please write something more positive!
+                            Your message had a score of {this.state.score}. Your message will not be sent! Please write something more positive!
                         </Alert> :
                         null
                     }

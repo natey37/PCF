@@ -18,8 +18,9 @@ class HomeContainer extends React.Component {
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp)
+            let sortedMessages = resp.sort((a,b) => a.created_at > b.created_at ? 1 : -1  ).reverse()
             this.setState({
-                messages: resp
+                messages: sortedMessages
             })
         })
     }

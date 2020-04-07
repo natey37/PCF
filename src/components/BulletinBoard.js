@@ -25,7 +25,7 @@ class BulletinBoard extends React.Component {
     this.setState({
       likes: this.state.likes + 1
     }, () => {
-      fetch(`http://localhost:3000/sentcharges/1`, {
+      fetch(`http://localhost:3000/sentcharges/${this.props.message.id}`, {
         method: "PATCH", 
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ class BulletinBoard extends React.Component {
 
  
   render(){
-    console.log(this.props)
+    
      const root= {
         flexGrow: 1,
         

@@ -21,14 +21,14 @@ function createData(duration, feelings, status) {
     return {duration, feelings, status}
 }
 
-const rows = [
-    createData('Today', 0.8, <img style={{height: '50px', width: '50px'}}src={up1}></img>),
-    createData('This Week', 0.6, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
-    createData('This Month', 0.7, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
-    createData('All Time', 0.73, <img style={{height: '50px', width: '50px'}}src={up1}></img>)
+// const rows = [
+//     createData('Today', 0.8, <img style={{height: '50px', width: '50px'}}src={up1}></img>),
+//     createData('This Week', 0.6, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
+//     createData('This Month', 0.7, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
+//     createData('All Time', 0.5, <img style={{height: '50px', width: '50px'}}src={up1}></img>)
 
 
-]
+// ]
 
 
 
@@ -45,10 +45,20 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+
+  const rows = [
+    createData('Today', 0.8, <img style={{height: '50px', width: '50px'}}src={up1}></img>),
+    createData('This Week', 0.6, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
+    createData('This Month', 0.7, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
+    createData('All Time',Math.round(props.score * 100) / 100, <img style={{height: '50px', width: '50px'}}src={up1}></img>)
+
+
+]
 
 //   const handleChangePage = (event, newPage) => {
 //     setPage(newPage);
@@ -58,7 +68,7 @@ export default function StickyHeadTable() {
 //     setRowsPerPage(+event.target.value);
 //     setPage(0);
 //   };
-
+    console.log(props)
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>

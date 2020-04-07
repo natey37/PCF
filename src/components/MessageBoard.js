@@ -101,7 +101,9 @@ class MessageBoard extends React.Component {
                     this.setState({
                         feelings : 'positive',
                         score: resp.score,
-                        chargeID: resp.charge.id
+                        chargeID: resp.charge.id,
+                        message: ''
+                        
                    }, () => {
                        fetch('http://localhost:3000/sentcharges', {
                            method: "POST", 
@@ -124,7 +126,9 @@ class MessageBoard extends React.Component {
                     this.setState({
                         feelings : 'neutral',
                         score: resp.score,
-                        chargeID: resp.charge.id
+                        chargeID: resp.charge.id,
+                        message: ''
+                        
                    }, () => {
                         fetch('http://localhost:3000/sentcharges', {
                             method: "POST", 
@@ -144,12 +148,14 @@ class MessageBoard extends React.Component {
                 } else if (resp.score < 0) {
                    this.setState({
                         feelings : 'negative',
-                        score: resp.score
+                        score: resp.score,
+                        message: ''
 
                    })
-                }
-                   
+                }     
             }
+
+           
         })
     }
 

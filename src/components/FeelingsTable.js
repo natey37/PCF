@@ -50,12 +50,23 @@ export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  
 
   const rows = [
-    createData('Today', 0.8, <img style={{height: '50px', width: '50px'}}src={up1}></img>),
-    createData('This Week', 0.6, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
-    createData('This Month', 0.7, <img style={{height: '50px', width: '50px'}}src={down1}></img>),
-    createData('All Time',Math.round(props.score * 100) / 100, <img style={{height: '50px', width: '50px'}}src={up1}></img>)
+    createData('Today', 
+        Math.round(props.time.daily * 100) / 100, 
+        <img style={{height: '50px', width: '50px'}}src={up1}></img>
+        ),
+    createData('This Week',
+        Math.round(props.time.weekly * 100) / 100,  
+        <img style={{height: '50px', width: '50px'}}src={up1}></img>),
+    createData('This Month', 
+        Math.round(props.time.monthly * 100) / 100, 
+        <img style={{height: '50px', width: '50px'}}src={up1}></img>),
+    createData('All Time', 
+        Math.round(props.time.allTime * 100) / 100, 
+        <img style={{height: '50px', width: '50px'}}src={up1}></img>
+        )
 
 
 ]
@@ -68,7 +79,7 @@ export default function StickyHeadTable(props) {
 //     setRowsPerPage(+event.target.value);
 //     setPage(0);
 //   };
-    console.log(props)
+    // console.log(props)
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>

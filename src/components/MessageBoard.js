@@ -48,8 +48,8 @@ class MessageBoard extends React.Component {
 
     state = {
         chargeID: '',
-        userID: 1,
-        sentUserID: 2,
+        userID: 2,
+        sentUserID: 1,
         score: 0,
      
 

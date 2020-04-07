@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LeaderGrid2() {
+export default function LeaderGrid2(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+        <br></br>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
@@ -52,13 +53,13 @@ export default function LeaderGrid2() {
                  <br></br>
                  <br></br>
                 
-                 <Typography>Charges: 100</Typography>
+                 <Typography>Charges: {props.leader[1]} </Typography>
              </Grid>
              <Grid xs={3}>
                  <br></br>
                  <br></br>
                 
-                 <Typography>Feelings: 0.75</Typography>
+                <Typography>Feelings Score: {props.leader[0]}</Typography>
              </Grid>
           </Grid>
         </Grid>

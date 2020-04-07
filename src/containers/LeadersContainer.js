@@ -10,6 +10,81 @@ import Grid from '@material-ui/core/Grid';
 
 class LeadersContainer extends React.Component {
 
+    state = {
+        leaders: []
+
+    }
+
+    componentDidMount(){
+        fetch('http://localhost:3000/sentcharges')
+        .then(resp => resp.json())
+        .then(resp => {
+            console.log(resp)
+            let userLikeHash = {}
+            resp.map(sentcharge => {
+                if(userLikeHash[sentcharge.user_id]){
+                    userLikeHash[sentcharge.user_id] += sentcharge.likes
+                } else {
+                    userLikeHash[sentcharge.user_id] = sentcharge.likes
+                }
+            })
+            let userFeelingsHash = {}
+            resp.map(sentcharge => {
+                if(userFeelingsHash[sentcharge.user_id]){
+                    userFeelingsHash[sentcharge.user_id] += (sentcharge.sentiment_score)
+                } else if(!userFeelingsHash[sentcharge.user_id]) {
+                    userFeelingsHash[sentcharge.user_id] = (sentcharge.sentiment_score)
+                } 
+            })
+            let userTotalSentChargeHash = {}
+            resp.map(sentcharge => {
+                if(userTotalSentChargeHash[sentcharge.user_id]){
+                    userTotalSentChargeHash[sentcharge.user_id] += 1
+                } else if(!userTotalSentChargeHash[sentcharge.user_id]) {
+                    userTotalSentChargeHash[sentcharge.user_id] = 1
+                } 
+            })
+            
+            console.log(userFeelingsHash)
+            console.log(userTotalSentChargeHash)
+            console.log(userLikeHash)
+
+            let combinedHash = {}
+            Object.keys(userFeelingsHash).forEach(function (el) {
+                console.log(el); // key
+                console.log(userFeelingsHash[el]); // value
+                combinedHash[el] = [userFeelingsHash[el]]
+            });
+            Object.keys(userTotalSentChargeHash).forEach(function (el) {
+                console.log(el); // key
+                console.log(userTotalSentChargeHash[el]); // value
+                let average = combinedHash[el] / userTotalSentChargeHash[el]
+                combinedHash[el] = [average]
+            }); 
+            Object.keys(userLikeHash).forEach(function (el) {
+                console.log(el); // key
+                console.log(userLikeHash[el]); // value
+                combinedHash[el] = [...combinedHash[el], userLikeHash[el], el]
+            });
+          
+
+            console.log(combinedHash)
+          
+
+            let combinedArray = []
+            Object.keys(combinedHash).forEach(function (el) {
+                console.log(el); // key
+                console.log(userLikeHash[el]); // value
+                combinedArray.push(combinedHash[el])
+            });
+            
+
+            this.setState({
+                leaders: combinedArray
+            })
+        })
+    }
+
     render(){
         const container = {
             height: '65vh',
@@ -31,6 +106,7 @@ class LeadersContainer extends React.Component {
             left: '200px'
 
         }
+        console.log(this.state.leaders)
         return (
             <div>
                 <br></br>
@@ -56,23 +132,8 @@ class LeadersContainer extends React.Component {
                 </div>
                 <Filter></Filter>
                 <br></br>
-                
-                    
-                    <LeaderGrid2 />  
-                    <br></br>
-                    <LeaderGrid2 /> 
-                    <br></br>
-                    <LeaderGrid2 /> 
-                    <br></br>
-                    <LeaderGrid2 /> 
-                    <br></br>
-                    <LeaderGrid2 />  
-                    <br></br>
-                    <LeaderGrid2 /> 
-                    <br></br>
-                    <LeaderGrid2 /> 
-                    <br></br>
-                    <LeaderGrid2 /> 
+                   
+                    {this.state.leaders.map(leader => <LeaderGrid2 leader={leader}/>) }
                 </Container>
 
                               

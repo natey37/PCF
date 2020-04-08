@@ -149,13 +149,8 @@ export default function MiniDrawer(props) {
                     Welcome {props.currentUser.username}  
                 </Typography>
             </div>
-            }
-            
-            <div className={classes.column} >
-                <Link to="/login">
-                        <img style={{width: '40px', height: '40px', marginLeft: '1000px'}} src={login}></img>
-                </Link>
-            </div>
+            }   
+
           </div>
           {/* <div style={row}>
                    <div style={column}>
@@ -260,15 +255,33 @@ export default function MiniDrawer(props) {
             <br></br>
             <br></br>
 
-            {['Log Out'].map((text, index) => (
+            {!props.currentUser ? 
+                ['Log In'].map((text, index) => (
+                    <ListItem  button key={text}>
+                    <ListItemIcon>
+                        <Link to="/login">
+                        <img style={{width: '40px', height: '40px'}} src={login}></img>
+                        </Link>
+                        {/* {fix sizing and font} */}
+                        <ListItemText style={{paddingLeft: "40px"}}primary={text} />
+                    </ListItemIcon>
+                    </ListItem>
+                ))
+            : 
+            ['Log Out'].map((text, index) => (
                 <ListItem  button key={text}>
                 <ListItemIcon>
-                    <img style={{width: '40px', height: '40px'}}src={logout}></img>
+                    <img onClick={props.logout} style={{width: '40px', height: '40px'}}src={logout}></img>
                     {/* {fix sizing and font} */}
                     <ListItemText style={{paddingLeft: "40px"}}primary={text} />
                 </ListItemIcon>
                 </ListItem>
-            ))}
+            ))
+        
+        }
+
+
+          
         </List>
       </Drawer>
     </div>

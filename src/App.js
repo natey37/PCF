@@ -27,12 +27,46 @@ class App extends React.Component {
     currentUser: null
 }
 
+componentDidMount(){
+  const user_id = localStorage.user_id
+
+  if(user_id){
+    fetch('http://localhost:3000/auto_login', {
+    headers: {
+        "Authorization": user_id 
+      }
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      if(response.errors){
+        alert(response.errors)
+      } else {
+        this.setState({
+          currentUser: response 
+        })
+      }
+    })
+  } else {
+
+  }
+}
+
 setUser = (user) => {
   console.log(this.props)
   this.setState({
     currentUser: user
   }, () => {
+    localStorage.user_id = user.id 
     this.props.history.push('/recharge')
+  })
+}
+
+logout = () => {
+  this.setState({
+    currentUser: null 
+  }, () => {
+    localStorage.removeItem("user_id")
+    this.props.history.push('/login')
   })
 }
 
@@ -98,12 +132,11 @@ handleNewUserSubmit = (event) => {
 }
 
   render(){
-    console.log(this.state.currentUser)
     return (
       <div className="App" style={{backgroundColor: '#2A4494'}}>
         
           
-            <Nav currentUser={this.state.currentUser}/>
+            <Nav currentUser={this.state.currentUser} logout={this.logout}/>
             <Switch>
                 <Route exact path="/login" 
                   render={(props) => <Login  handleSubmit={this.handleUserSubmit} handleChange={this.handleUserChange}/>}

@@ -112,7 +112,7 @@ class MessageBoard extends React.Component {
                         }, 
                            body: JSON.stringify({
                                charge_id: this.state.chargeID,
-                               user_id: this.state.userID,
+                               user_id: localStorage.user_id,
                                sent_user_id: this.state.sentUserID, 
                                sentiment_score: this.state.score,
                                likes: 0, 

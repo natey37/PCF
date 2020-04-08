@@ -117,10 +117,10 @@ class FeelingsContainer extends React.Component {
                     this.setState({
                         monthly: sum3
                     })
-                 
-               console.log(thisDateMonth)
-               console.log(newMonthlyResps)
-                console.log(this.state.monthly)
+                 console.log(thisDate)
+            //    console.log(thisDateMonth)
+            //    console.log(newMonthlyResps)
+            //     console.log(this.state.monthly)
             //   var oneWeekAgo = new Date();
             //   console.log(oneWeekAgo)
             //    let x = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);

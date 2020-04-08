@@ -22,7 +22,7 @@ import leaders from './styling/leaders.png'
 import logout from './styling/logout.png'
 import recharge from './styling/recharge.png'
 import sentiment from './styling/sentiment.png'
-
+import login from './styling/login.png'
 import { Link } from "react-router-dom";
 
 
@@ -91,9 +91,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  row: {
+    display: 'flex'
+},
+ column: {
+    flex: '33%', 
+    padding: '5px'
+}
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -105,6 +112,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+//   console.log(props.currentUser.username)
 
   return (
     <div className={classes.root}>
@@ -128,11 +136,40 @@ export default function MiniDrawer() {
           >
             <MenuIcon style={{color: '#FFED87'}}/>
           </IconButton>
-          <Typography  style={{color: '#FFED87'}} variant="h6" noWrap>
-            Positively Charged       
-          </Typography>
 
+          <div className={classes.row} >
+            <div className={classes.column}>
+                <Typography  style={{color: '#FFED87'}} variant="h6" noWrap>
+                    Positively Charged       
+                </Typography>
+            </div>
+            {props.currentUser === null ? null : 
+                <div className={classes.column}>
+                <Typography  style={{color: '#FFED87', marginLeft: '300px'}} variant="h6" noWrap>
+                    Welcome {props.currentUser.username}  
+                </Typography>
+            </div>
+            }
             
+            <div className={classes.column} >
+                <Link to="/login">
+                        <img style={{width: '40px', height: '40px', marginLeft: '1000px'}} src={login}></img>
+                </Link>
+            </div>
+          </div>
+          {/* <div style={row}>
+                   <div style={column}>
+                        <img style={{width: '40px', height: '40px', marginRight: '280px'}} src={pin_flipped} alt="Snow" />
+                    </div>
+                    <div style={column}>
+                        <HomeFilter></HomeFilter>
+                    </div>
+                    <div style={column}>
+                        <img style={{width: '40px', height: '40px', marginLeft: '280px' }} src={home_pin} alt="Mountains"/>
+                    </div>
+                </div> */}
+
+
           {/* <Typography  style={{color: '#FFED87', position: "absolute", paddingLeft: "1500px"}} variant="h6" noWrap>
             FAQ
           </Typography> */}
@@ -223,7 +260,7 @@ export default function MiniDrawer() {
             <br></br>
             <br></br>
 
-                {['Log Out'].map((text, index) => (
+            {['Log Out'].map((text, index) => (
                 <ListItem  button key={text}>
                 <ListItemIcon>
                     <img style={{width: '40px', height: '40px'}}src={logout}></img>
@@ -234,15 +271,6 @@ export default function MiniDrawer() {
             ))}
         </List>
       </Drawer>
-      {/* <main className={classes.content} style={{backgroundColor: '#2A4494', height:"100vh"}}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>
-          this is positively charged! 
-        </Typography>
-        <Typography paragraph>
-        send some postive charge!
-        </Typography>
-      </main> */}
     </div>
   );
 }

@@ -6,35 +6,132 @@ import Recharge from './Recharge.js'
 import Home from './Home.js'
 import Leaders from './Leaders.js'
 import Feelings from './Feelings.js'
-
+import Login from './Login.js'
+import Signup from './Signup.js'
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App" style={{backgroundColor: '#2A4494'}}>
-      
-        <Router>
-          <Nav/>
-          <Switch>
-              <Route exact path="/home"
-                render={(props) => <Home />}
-              />
-              <Route exact path="/charge"
-                render={(props) => <Charge />}
-              />
-              <Route exact path="/recharge"
-                render={(props) => <Recharge />}
-              />
-              <Route exact path="/feelings"
-                render={(props) => <Feelings />}
-              />
-              <Route exact path="/leaders"
-                render={(props) => <Leaders />}
-              />
-            </Switch>
-        </Router>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    loginForm: {
+      username: '', 
+      password: ''
+    },
+    signupForm: {
+      name: '',
+      email: '',
+      username: '', 
+      password: '', 
+      passwordConfirmation: ''
+    },
+    currentUser: null
+}
+
+setUser = (user) => {
+  console.log(this.props)
+  this.setState({
+    currentUser: user
+  }, () => {
+    this.props.history.push('/recharge')
+  })
+}
+
+handleUserChange = (event) => {
+  this.setState({
+    loginForm: {...this.state.loginForm, [event.target.name]: event.target.value
+    }
+  })
+}
+
+handleUserSubmit = (event) => {
+  event.preventDefault()
+    fetch('http://localhost:3000/login', {
+      method: "POST", 
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(this.state.loginForm)
+    })
+    .then(res => res.json())
+    .then(response => {
+      console.log(response)
+      if(response.errors){
+        alert(response.errors)
+      } else {
+        this.setUser(response.user)
+        
+      }
+    })
+  
+}
+
+handleNewUserChange = (event) => {
+  this.setState({
+    signupForm: {...this.state.signupForm, [event.target.name]: event.target.value
+    }  })
+}
+
+handleNewUserSubmit = (event) => {
+  event.preventDefault()
+
+  if(this.state.password === this.state.passwordConfirmation){
+      fetch('http://localhost:3000/users', {
+        method: "POST", 
+        headers: {
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({name: this.state.signupForm.name, email: this.state.signupForm.email, username: this.state.signupForm.username, password: this.state.signupForm.password})
+      })
+      .then(res => res.json())
+      .then(response => {
+        if(response.errors){
+          alert(response.errors)
+        } else {
+          this.setUser(response.user)
+          
+        }
+      })
+    } else {
+      alert("Passwords dont match!")
+    }
+ 
+}
+
+  render(){
+    console.log(this.state.currentUser)
+    return (
+      <div className="App" style={{backgroundColor: '#2A4494'}}>
+        
+          
+            <Nav currentUser={this.state.currentUser}/>
+            <Switch>
+                <Route exact path="/login" 
+                  render={(props) => <Login  handleSubmit={this.handleUserSubmit} handleChange={this.handleUserChange}/>}
+                />
+                <Route exact path="/signup" 
+                  render={(props) => <Signup  handleChange={this.handleNewUserChange} handleSubmit={this.handleNewUserSubmit} currentUser={this.state.currentUser}/>}
+                />
+                <Route exact path="/home"
+                  render={(props) => <Home />}
+                />
+                <Route exact path="/charge"
+                  render={(props) => <Charge />}
+                />
+                <Route exact path="/recharge"
+                  render={(props) => <Recharge />}
+                />
+                <Route exact path="/feelings"
+                  render={(props) => <Feelings />}
+                />
+                <Route exact path="/leaders"
+                  render={(props) => <Leaders />}
+                />
+              </Switch>
+          
+      </div>
+    );
+  }
+ 
 }
 
 export default App;

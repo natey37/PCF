@@ -46,7 +46,7 @@ export default function LeaderGrid2(props) {
              
              <Grid xs={5}>
                  <br></br>
-                 <Typography>This is the username</Typography>
+                 <Typography>{props.leader[2]}</Typography>
              </Grid>
             
              <Grid xs={3}>

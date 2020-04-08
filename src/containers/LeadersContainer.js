@@ -22,26 +22,26 @@ class LeadersContainer extends React.Component {
             console.log(resp)
             let userLikeHash = {}
             resp.map(sentcharge => {
-                if(userLikeHash[sentcharge.user_id]){
-                    userLikeHash[sentcharge.user_id] += sentcharge.likes
+                if(userLikeHash[sentcharge.username]){
+                    userLikeHash[sentcharge.username] += sentcharge.likes
                 } else {
-                    userLikeHash[sentcharge.user_id] = sentcharge.likes
+                    userLikeHash[sentcharge.username] = sentcharge.likes
                 }
             })
             let userFeelingsHash = {}
             resp.map(sentcharge => {
-                if(userFeelingsHash[sentcharge.user_id]){
-                    userFeelingsHash[sentcharge.user_id] += (sentcharge.sentiment_score)
-                } else if(!userFeelingsHash[sentcharge.user_id]) {
-                    userFeelingsHash[sentcharge.user_id] = (sentcharge.sentiment_score)
+                if(userFeelingsHash[sentcharge.username]){
+                    userFeelingsHash[sentcharge.username] += (sentcharge.sentiment_score)
+                } else if(!userFeelingsHash[sentcharge.username]) {
+                    userFeelingsHash[sentcharge.username] = (sentcharge.sentiment_score)
                 } 
             })
             let userTotalSentChargeHash = {}
             resp.map(sentcharge => {
-                if(userTotalSentChargeHash[sentcharge.user_id]){
-                    userTotalSentChargeHash[sentcharge.user_id] += 1
-                } else if(!userTotalSentChargeHash[sentcharge.user_id]) {
-                    userTotalSentChargeHash[sentcharge.user_id] = 1
+                if(userTotalSentChargeHash[sentcharge.username]){
+                    userTotalSentChargeHash[sentcharge.username] += 1
+                } else if(!userTotalSentChargeHash[sentcharge.username]) {
+                    userTotalSentChargeHash[sentcharge.username] = 1
                 } 
             })
             
@@ -78,9 +78,9 @@ class LeadersContainer extends React.Component {
                 combinedArray.push(combinedHash[el])
             });
             
-
+            let sorted = combinedArray.sort((a, b) => a[1] > b[1] ? 1 : -1).reverse()
             this.setState({
-                leaders: combinedArray
+                leaders: sorted
             })
         })
     }

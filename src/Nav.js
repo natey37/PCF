@@ -145,7 +145,7 @@ export default function MiniDrawer(props) {
             </div>
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
-                <Typography  style={{color: '#FFED87', marginLeft: '300px'}} variant="h6" noWrap>
+                <Typography  style={{color: '#FFED87', marginLeft: '900px'}} variant="h6" noWrap>
                     Welcome {props.currentUser.username}  
                 </Typography>
             </div>
@@ -263,7 +263,7 @@ export default function MiniDrawer(props) {
                         <img style={{width: '40px', height: '40px'}} src={login}></img>
                         </Link>
                         {/* {fix sizing and font} */}
-                        <ListItemText style={{paddingLeft: "40px"}}primary={text} />
+                        <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
                     </ListItemIcon>
                     </ListItem>
                 ))
@@ -273,7 +273,7 @@ export default function MiniDrawer(props) {
                 <ListItemIcon>
                     <img onClick={props.logout} style={{width: '40px', height: '40px'}}src={logout}></img>
                     {/* {fix sizing and font} */}
-                    <ListItemText style={{paddingLeft: "40px"}}primary={text} />
+                    <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
                 </ListItemIcon>
                 </ListItem>
             ))

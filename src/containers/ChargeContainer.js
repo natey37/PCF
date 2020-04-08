@@ -30,7 +30,7 @@ class ChargeContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-            <MessageBoard/>                
+            <MessageBoard currentUser={this.props.currentUser}/>                
                 <br></br>
                 <br></br>
                 <br></br>

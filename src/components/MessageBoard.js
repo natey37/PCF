@@ -51,7 +51,7 @@ class MessageBoard extends React.Component {
         userID: 2,
         sentUserID: 1,
         score: 0,
-     
+        username: '',
 
         message: '',
         feelings: '', 
@@ -63,6 +63,10 @@ class MessageBoard extends React.Component {
     componentDidMount() {
         this.textarea.focus();
         autosize(this.textarea);
+
+        this.setState({
+            username: localStorage.username
+        })
       }
 
     setClose = () => {
@@ -116,8 +120,8 @@ class MessageBoard extends React.Component {
                                sent_user_id: this.state.sentUserID, 
                                sentiment_score: this.state.score,
                                likes: 0, 
-                               message: resp.charge.message
-
+                               message: resp.charge.message,
+                               username: this.state.username
                            })
                        })
                     //    .then(resp => resp.json()).then(resp => {console.log(resp)})
@@ -141,7 +145,9 @@ class MessageBoard extends React.Component {
                                 sent_user_id: this.state.sentUserID, 
                                 sentiment_score: this.state.score,
                                 likes: 0,
-                                message: resp.charge.message
+                                message: resp.charge.message,
+                                username: this.state.username
+
                             })
                         })
                    })
@@ -160,6 +166,7 @@ class MessageBoard extends React.Component {
     }
 
     render(){
+        console.log(this.state)
         const style = {
             textAlign: 'center',
             width: 500, 

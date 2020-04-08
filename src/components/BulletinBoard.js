@@ -96,7 +96,7 @@ class BulletinBoard extends React.Component {
                 <Grid item xs container direction="column" spacing={2}>
                   <Grid item xs>
                     <Typography gutterBottom variant="subtitle1">
-                      username
+                      {this.props.message.username}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
                       {this.props.message.message}

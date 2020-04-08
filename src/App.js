@@ -52,10 +52,10 @@ componentDidMount(){
 }
 
 setUser = (user) => {
-  console.log(this.props)
   this.setState({
     currentUser: user
   }, () => {
+    localStorage.username = user.username
     localStorage.user_id = user.id 
     this.props.history.push('/recharge')
   })
@@ -145,19 +145,19 @@ handleNewUserSubmit = (event) => {
                   render={(props) => <Signup  handleChange={this.handleNewUserChange} handleSubmit={this.handleNewUserSubmit} currentUser={this.state.currentUser}/>}
                 />
                 <Route exact path="/home"
-                  render={(props) => <Home />}
+                  render={(props) => <Home currentUser={this.state.currentUser}/>}
                 />
                 <Route exact path="/charge"
-                  render={(props) => <Charge />}
+                  render={(props) => <Charge currentUser={this.state.currentUser} />}
                 />
                 <Route exact path="/recharge"
-                  render={(props) => <Recharge />}
+                  render={(props) => <Recharge currentUser={this.state.currentUser}/>}
                 />
                 <Route exact path="/feelings"
-                  render={(props) => <Feelings />}
+                  render={(props) => <Feelings currentUser={this.state.currentUser}/>}
                 />
                 <Route exact path="/leaders"
-                  render={(props) => <Leaders />}
+                  render={(props) => <Leaders currentUser={this.state.currentUser}/>}
                 />
               </Switch>
           

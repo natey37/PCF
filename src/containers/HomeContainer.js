@@ -6,7 +6,7 @@ import pin_flipped from '../styling/pin_flipped.png'
 import Box from '@material-ui/core/Button';
 import HomeFilter from '../components/HomeFilter.js'
 import Grid from '@material-ui/core/Grid';
-
+import '../styling/index.css'
 class HomeContainer extends React.Component {
 
     state = {
@@ -18,7 +18,7 @@ class HomeContainer extends React.Component {
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp)
-            let sortedMessages = resp.sort((a,b) => a.created_at > b.created_at ? 1 : -1  ).reverse()
+            let sortedMessages = resp.sort((a,b) => a.created_at > b.created_at ? 1 : -1  ).reverse().slice(0, 20)
             this.setState({
                 messages: sortedMessages
             })
@@ -28,7 +28,7 @@ class HomeContainer extends React.Component {
     render(){
 
         const container = {
-            height: '65vh',
+            height: '70vh',
             overflow: 'auto',
             background: '#6699CC',
             boxShadow: '5px 5px #4B7095',
@@ -46,6 +46,15 @@ class HomeContainer extends React.Component {
             flex: '33%', 
             padding: '5px'
         }
+        const h1 = {
+            fontFamily: 'Noto Sans' + "sans-serif",
+            // fontFamily: 'soleil' + 'sansSerif',
+            // fontStyle: 'normal',
+            // fontWeight: 300,
+            fontSize: '40px',
+            color: 'white',
+            margin: '0'
+        }
                
         return (
             <div>
@@ -56,7 +65,7 @@ class HomeContainer extends React.Component {
                 <br></br>
                 <Box style={box}>
                     
-                    <h1 style={{fontSize: '30px', color: 'white'}}>
+                    <h1 style={h1}>
                         {/* <img style={{width: '30px', height: '30px', marginRight: '55px'}} src={pin_flipped}></img> */}
                         
                         

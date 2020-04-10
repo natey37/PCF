@@ -87,7 +87,7 @@ class LeadersContainer extends React.Component {
 
     render(){
         const container = {
-            height: '65vh',
+            height: '70vh',
             overflow: 'auto',
             background: '#6699CC',
             boxShadow: '5px 5px #4B7095',
@@ -95,7 +95,7 @@ class LeadersContainer extends React.Component {
 
         }
         const box = {
-            width: '500px',
+            width: '600px',
             boxShadow: '5px 5px #40907F',
             backgroundColor: "#63E2C6",
                 }
@@ -115,7 +115,9 @@ class LeadersContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <Box style={box}>
-                    <h1 style={{color: 'white'}}>These are the Protons!</h1>
+                    <h1 style={{color: 'white',fontFamily: 'Noto Sans' + "sans-serif", margin: '0', fontSize: '40px' }}>
+                        These are the Protons!
+                    </h1>
                     
                 </Box>
 

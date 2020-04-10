@@ -52,17 +52,18 @@ export default function StickyHeadTable(props) {
 
   
 
+
   const rows = [
     createData('Today', 
         Math.round(props.time.daily * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={up1}></img>
+        <img style={{height: '50px', width: '50px'}}src={props.time.daily >= props.time.weekly ? up1 : down1}></img>
         ),
-    createData('This Week',
-        Math.round(props.time.weekly * 100) / 100,  
-        <img style={{height: '50px', width: '50px'}}src={up1}></img>),
-    createData('This Month', 
-        Math.round(props.time.monthly * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={up1}></img>),
+    createData('Yesterday',
+        Math.round(props.time.yesterday * 100) / 100,  
+        <img style={{height: '50px', width: '50px'}}src={props.time.yesterday >= props.time.monthly ? up1 : down1}></img>),
+    createData('This Week', 
+        Math.round(props.time.weekly * 100) / 100, 
+        <img style={{height: '50px', width: '50px'}}src={props.time.weekly >= props.time.allTime ? up1 : down1}></img>),
     createData('All Time', 
         Math.round(props.time.allTime * 100) / 100, 
         <img style={{height: '50px', width: '50px'}}src={up1}></img>
@@ -90,7 +91,8 @@ export default function StickyHeadTable(props) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth,backgroundColor: "#FFED87", fontSize: "35px", textAlign: 'center'}}
+                  style={{ minWidth: column.minWidth,backgroundColor: "#FFED87", fontSize: "35px", textAlign: 'center',fontFamily: 'Noto Sans' + "sans-serif"
+                }}
                 >
                   {column.label}
                 </TableCell>
@@ -104,7 +106,8 @@ export default function StickyHeadTable(props) {
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell light={true} key={column.id} align={column.align} style={{backgroundColor: '#6699CC', color: 'white', fontSize: '25px', textAlign: 'center'}}>
+                      <TableCell light={true} key={column.id} align={column.align} style={{backgroundColor: '#6699CC', color: 'white', fontSize: '25px', textAlign: 'center',fontFamily: 'Noto Sans' + "sans-serif"
+                    }}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );

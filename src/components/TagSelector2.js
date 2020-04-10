@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     // paddingLeft: '200px',
     position: 'absolute',
     left: '475px',
-    bottom: '100px',
+    bottom: '80px',
     width: 500,
     '& > * + *': {
       marginTop: theme.spacing(3),

@@ -10,13 +10,14 @@ class ChargeContainer extends React.Component {
         const paper = {
             position: 'absolute', 
             right: '100px',
-            width: '500px',
-            height: '225px',
-            backgroundColor: '#FFED87',
-            boxShadow: '5px 5px #BAAD63'
+            width: '550px',
+            height: '300px',
+            backgroundColor: '#7CFD8A',
+            boxShadow: '5px 5px #59B263'
 
         }
         const h3= {
+            fontFamily: 'Noto Sans' + "sans-serif",
             position: 'absolute',
             left: '250px',
             color: 'white'
@@ -32,8 +33,8 @@ class ChargeContainer extends React.Component {
                 <br></br>
             <MessageBoard currentUser={this.props.currentUser}/>                
                 <br></br>
-                <br></br>
-                <br></br>
+                
+                
 
             <Paper style={paper}>
                 <Prompts/>

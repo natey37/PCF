@@ -1,7 +1,7 @@
 import React from 'react'
 import FeelingsTable from '../components/FeelingsTable.js'
 import Box from '@material-ui/core/Button';
-
+import Snackbar from '../components/Snackbar.js'
 class FeelingsContainer extends React.Component {
 
     state = {
@@ -9,6 +9,7 @@ class FeelingsContainer extends React.Component {
         weekly: '', 
         monthly: '',
         allTime: '',
+        yesterday: ''
     }
 
     componentDidMount(){
@@ -55,6 +56,30 @@ class FeelingsContainer extends React.Component {
               this.setState({
                   daily: sum1
               })
+        //finding yesterdays score 
+        let yesterday = thisDate.setDate(thisDate.getDate() - 1);
+        let test = new Date(yesterday)
+        let realYesterday = test.getDate()
+        console.log(yesterday)
+        console.log(test)
+        console.log(realYesterday)
+        let filteredYesterdayResps = newResps.filter(sentcharge => sentcharge.created_at === realYesterday)
+        console.log(filteredYesterdayResps)
+        //summing scores
+        let yesterdayScores = filteredYesterdayResps.map(sentcharge => sentcharge.sentiment_score)
+        console.log(yesterdayScores)
+        //filter any nulls
+        let yesterdayFiltered = yesterdayScores.filter(function (el) {
+            return el != null;
+          });
+          console.log(yesterdayFiltered)
+          const add7 = (a, b) =>
+            a + b
+          // use reduce to sum our array
+          const sum7 = yesterdayFiltered.reduce(add7) /yesterdayFiltered.length
+          this.setState({
+              yesterday: sum7
+          })
 
               //filter weekly
               let day = thisDateDay 
@@ -148,7 +173,7 @@ class FeelingsContainer extends React.Component {
 
     render(){
         const box = {
-            width: '500px',
+            width: '600px',
             boxShadow: '5px 5px #40907F',
             backgroundColor: "#63E2C6",
                 }
@@ -162,14 +187,40 @@ class FeelingsContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <Box  style={box}>
-                    <h1 style={{color: 'white'}}>How are we feeling?</h1>
+                    <h1 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif", margin: '0', fontSize: '40px'
+                    }}>
+                        How are we feeling?
+                     </h1>
 
                 </Box>
                 <br></br>
                 <br></br>
                 <br></br>
                 <FeelingsTable time={this.state} />  
-                   
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                
+                 <Snackbar />
             </div>
         )
     }

@@ -92,26 +92,16 @@ class BulletinBoard extends React.Component {
                   <img style={img} alt="complex" src={atom} />
                 </ButtonBase>
               </Grid>
-              <Grid item xs={12} sm container>
+              <Grid item xs={12} sm container style={{marginRight: "140px"}}>
                 <Grid item xs container direction="column" spacing={2}>
                   <Grid item xs>
-                    <Typography gutterBottom variant="subtitle1">
+                    <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
                       {this.props.message.username}
                     </Typography>
-                    <Typography variant="body2" gutterBottom>
+                    <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '15px'}}>
                       {this.props.message.message}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                        <Moment format="DD/MM/YY HH:mm:ss">
-                            {this.props.message.created_at}
-
-                        </Moment>
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    {/* <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                      Like
-                    </Typography> */}
+                    <br></br>
                     <Button onClick={() => this.handleBothClickEvents()} >
                       
                       {this.state.switch ? 
@@ -128,6 +118,19 @@ class BulletinBoard extends React.Component {
                     {/* charge: {this.state.likes} */}
                     </Button>
                   </Grid>
+                  <Grid item>
+                    {/* <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                      Like
+                    </Typography> */}
+                    
+                    <Typography variant="body2" color="textSecondary" style={{     fontFamily: 'Noto Sans' + "sans-serif", marginLeft: '360px'}}>
+                        <Moment format="DD/MM/YY HH:mm:ss">
+                            {this.props.message.created_at}
+
+                        </Moment>
+                    </Typography>
+                  </Grid>
+
                 </Grid>
                 {/* <Grid item>
                   <Typography variant="subtitle1">$19.00</Typography>

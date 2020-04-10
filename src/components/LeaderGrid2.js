@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     maxWidth: 800,
     boxShadow: '5px 5px #4B7095',
-    backgroundColor: '#FAF0E6'
+    backgroundColor: '#FEDAF2'
   },
   image: {
     width: 70,
@@ -45,21 +45,21 @@ export default function LeaderGrid2(props) {
           <Grid item xs={12} sm container >
              
              <Grid xs={5}>
-                 <br></br>
-                 <Typography>{props.leader[2]}</Typography>
+                
+                 <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '30px', marginTop: '10px'}}>{props.leader[2]}</Typography>
              </Grid>
             
              <Grid xs={3}>
                  <br></br>
                  <br></br>
                 
-                 <Typography>Charges: {props.leader[1]} </Typography>
+                 <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold'}}>Charges:      {props.leader[1]} </Typography>
              </Grid>
-             <Grid xs={3}>
+             <Grid xs={4}>
                  <br></br>
                  <br></br>
                 
-                <Typography>Feelings Score: {props.leader[0]}</Typography>
+                <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold'}}>Feelings Score: {Math.round(props.leader[0] * 100) / 100}</Typography>
              </Grid>
           </Grid>
         </Grid>

@@ -52,7 +52,7 @@ class MessageBoard extends React.Component {
 
     state = {
         chargeID: '',
-        userID: 2,
+        userID: '',
         sentUserID: 1,
         score: 0,
         username: '',
@@ -66,6 +66,7 @@ class MessageBoard extends React.Component {
 
     }
 
+    
     componentDidMount() {
         this.textarea.focus();
         autosize(this.textarea);
@@ -136,7 +137,12 @@ class MessageBoard extends React.Component {
                                username: this.state.username
                            })
                        })
-                    //    .then(resp => resp.json()).then(resp => {console.log(resp)})
+                       .then(resp => resp.json()).then(resp => {
+                            console.log(resp.sentcharge.id)
+                            console.log(resp)
+                            console.log(this.props.values)
+                            this.makeTags(resp)
+                       })
                    })
                 } else if (resp.score >= 0 && resp.score < 0.3) {
                     this.setState({
@@ -175,6 +181,25 @@ class MessageBoard extends React.Component {
 
            
         })
+    }
+
+    makeTags = (resp) => {
+        for (const value in this.props.values) {
+            console.log(value)
+            
+            fetch('http://localhost:3000/chargetags', {
+                method: "POST", 
+                headers: {
+                 'Content-Type': 'application/json'
+             }, 
+                body: JSON.stringify({
+                    sentcharge_id: resp.sentcharge.id,
+                    tag_id: 0,
+                    tagtype: value
+                })
+               }).then(resp => resp.json()).then(resp => {console.log(resp)})
+        
+        }
     }
 
     render(){

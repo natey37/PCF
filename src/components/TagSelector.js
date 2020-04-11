@@ -5,49 +5,52 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // paddingLeft: '200px',
-    position: 'absolute',
-    left: '250px',
-    width: 500,
-    '& > * + *': {
-      marginTop: theme.spacing(3),
-    },
-    boxShadow: '3px 3px #BAAD63'
 
-  },
-  selector: {
-      backgroundColor: '#FFED87'
-  },
 
-}));
+class TagSelector extends React.Component {
 
-export default function Tags() {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Autocomplete
-        className={classes.selector}
-        multiple
-        id="tags-outlined"
-        options={tagOptions}
-        getOptionLabel={(option) => option.tag}
-        // defaultValue={[tagOptions[1]]}
-        filterSelectedOptions
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label=""
-            placeholder="Choose a Tag for your Message!"
+   
+  render(){
+    console.log(this.props)
+    const root= {
+        // paddingLeft: '200px',
+        position: 'absolute',
+        left: '250px',
+        width: 500,
+        '& > * + *': {
+        //   marginTop: theme.spacing(3),
+        },
+        boxShadow: '3px 3px #BAAD63'
+    
+      }
+      const selector= {
+          backgroundColor: '#FFED87'
+      }
+    return (
+        <div style={root}>
+          <Autocomplete
+            onChange={(event, value) => this.props.handleChange(event, value)}
+            style={selector}
+            multiple
+            id="tags-outlined"
+            options={tagOptions}
+            getOptionLabel={(option) => option.tag}
+            // defaultValue={[tagOptions[1]]}
+            filterSelectedOptions
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label=""
+                placeholder="Choose a Tag for your Message!"
+              />
+            )}
           />
-        )}
-      />
-     
-    </div>
-  );
+         
+        </div>
+      );
+  }
+ 
 }
 
 const tagOptions = [
@@ -73,3 +76,5 @@ const tagOptions = [
     { tag: 'Inspirational'},
 
 ];
+
+export default TagSelector

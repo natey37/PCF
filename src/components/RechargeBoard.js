@@ -9,7 +9,8 @@ class RechargeBoard extends React.Component {
     state = {
         recharge: false,
         charge: false,
-        todaysMessage: ''
+        todaysMessage: '',
+        tags: 
     }
 
     componentDidMount(){
@@ -33,6 +34,19 @@ class RechargeBoard extends React.Component {
                 todaysMessage: todaysMessage.message
             })
         })
+    }
+
+    handleValuesChange = (event, value) => {
+        console.log(event.target)
+        console.log(value)
+        let values = value.map(val => val.tag)
+        console.log(values)
+        values.map(value => {
+            this.setState({
+                tags: [...this.state.tags, value]
+            })
+        })
+       
     }
 
 
@@ -166,7 +180,7 @@ class RechargeBoard extends React.Component {
                         <div>
                             <h3 style={h3}>Add tags to help filter content that is most suited to your needs!</h3>
                             
-                            <TagSelector2 />
+                            <TagSelector2 handleChange={this.handleValuesChange}/>
                         </div>
                    
                         

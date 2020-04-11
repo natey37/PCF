@@ -6,7 +6,30 @@ import Paper from '@material-ui/core/Paper';
 import Prompts from '../components/Prompts.js'
 class ChargeContainer extends React.Component {
 
+    state = {
+        values: {
+        
+        }
+    }
+
+    handleValuesChange = (event, value) => {
+        console.log(event.target)
+        console.log(value)
+        let values = value.map(val => val.tag)
+        console.log(values)
+        values.map(value => {
+            this.setState({
+                values: {
+                    ...this.state.values, 
+                    [value]: value
+                }
+            })
+        })
+       
+    }
+
     render(){
+        console.log(this.state.values)
         const paper = {
             position: 'absolute', 
             right: '100px',
@@ -31,7 +54,7 @@ class ChargeContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-            <MessageBoard currentUser={this.props.currentUser}/>                
+            <MessageBoard currentUser={this.props.currentUser} values={this.state.values}/>                
                 <br></br>
                 
                 
@@ -44,7 +67,7 @@ class ChargeContainer extends React.Component {
             <h3 style={h3}>Help us share your positivity with someone who needs it most!</h3>
             <br></br>
             <br></br>
-            <TagSelector />
+            <TagSelector handleChange={this.handleValuesChange} />
            
 
             {/* </Container> */}

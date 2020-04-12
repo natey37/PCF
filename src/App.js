@@ -139,7 +139,7 @@ handleNewUserSubmit = (event) => {
             <Nav currentUser={this.state.currentUser} logout={this.logout}/>
             <Switch>
                 <Route exact path="/login" 
-                  render={(props) => <Login  handleSubmit={this.handleUserSubmit} handleChange={this.handleUserChange}/>}
+                  render={(props) => <Login  handleSubmit={this.handleUserSubmit} handleChange={this.handleUserChange} currentUser={this.state.currentUser}/>}
                 />
                 <Route exact path="/signup" 
                   render={(props) => <Signup  handleChange={this.handleNewUserChange} handleSubmit={this.handleNewUserSubmit} currentUser={this.state.currentUser}/>}

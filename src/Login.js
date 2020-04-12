@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 class Login extends React.Component {
@@ -14,7 +14,7 @@ class Login extends React.Component {
     // backgroundColor: '#008080'
     return (
       <div >
-     
+          {this.props.currentUser && <Redirect to='/home'/>}
     
 
         <br></br>

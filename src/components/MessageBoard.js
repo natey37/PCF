@@ -20,6 +20,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import autosize from "autosize";
 import charge from '../styling/charge.png'
 
+import positive from '../styling/positive.png'
+import negative from '../styling/negative.png'
+import neutral from '../styling/neutral.png'
+
 
 // const useStyles = makeStyles((theme) => ({
 //     root: {
@@ -168,6 +172,12 @@ class MessageBoard extends React.Component {
 
                             })
                         })
+                        .then(resp => resp.json()).then(resp => {
+                            // console.log(resp.sentcharge.id)
+                            console.log(resp)
+                            // console.log(this.props.values)
+                            this.makeTags(resp)
+                       })
                    })
                 } else if (resp.score < 0) {
                    this.setState({
@@ -248,10 +258,10 @@ class MessageBoard extends React.Component {
             verticalAlign: 'middle', 
             zIndex: 1,
             position: 'absolute',
-            left: '32.8%', 
+            left: '26%', 
             right: '50%', 
-            width: '500px',
-            height: '300px',
+            width: '700px',
+            height: '400px',
             marginTop: '150px'
             
         }
@@ -262,23 +272,31 @@ class MessageBoard extends React.Component {
                     
                     {this.state.feelings === 'neutral' && this.state.close === false ? 
                     
-                    <Alert style={alert}  severity="info" onClose={() => this.setClose()}>
-                        <AlertTitle>You are a neutral Neutron!</AlertTitle>
+                    <Alert icon={false} style={alert}  severity="info" onClose={() => this.setClose()}>
+                         <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={neutral}></img>
+                        <AlertTitle style={{marginLeft: '70px'}}>You are a neutral Neutron!</AlertTitle>
+                        <div style={{marginLeft: '70px'}}>
                          Your message had a score of {Math.round(this.state.score * 100) / 100}. You're almost there! Keep up the good attitude!
+                         </div>
                     </Alert> :
                     null
                     }
                     {this.state.feelings === 'positive' && this.state.close === false ? 
                     
-                        <Alert style={alert}  severity="success" onClose={() => this.setClose()}>
-                            <AlertTitle>You are a positive Proton!</AlertTitle>
+                        <Alert  icon={false} style={alert}  severity="success" onClose={() => this.setClose()}>
+                            <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={positive}></img>
+                            <br></br>
+                            <AlertTitle style={{marginLeft: '70px'}}>You are a positive Proton!</AlertTitle>
+                            <div style={{marginLeft: '70px'}}>
                             Your message had a score of {Math.round(this.state.score * 100) / 100}. You're awesome! Keep up the positive charge!
+                            </div>
                         </Alert> :
                         null
                     }
                     {this.state.feelings === 'negative' && this.state.close === false ? 
                     
-                        <Alert style={alert}  severity="error" onClose={() => this.setClose()}>
+                        <Alert icon={false} style={alert}  severity="error" onClose={() => this.setClose()}>
+                             <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={negative}></img>
                             <AlertTitle>You are a negative Electron!</AlertTitle>
                             Your message had a score of {Math.round(this.state.score * 100) / 100}. Your message will not be sent! Please write something more positive!
                         </Alert> :

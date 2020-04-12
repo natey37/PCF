@@ -24,7 +24,8 @@ import recharge from './styling/recharge.png'
 import sentiment from './styling/sentiment.png'
 import login from './styling/login.png'
 import { Link } from "react-router-dom";
-
+import title from './styling/title.png'
+import titlewhite from './styling/titlewhite.png'
 
 
 
@@ -139,13 +140,14 @@ export default function MiniDrawer(props) {
 
           <div className={classes.row} >
             <div className={classes.column}>
-                <Typography  style={{color: '#FFED87'}} variant="h6" noWrap>
+                <img style={{height: '50px'}}src={titlewhite}></img>
+                {/* <Typography  style={{color: '#FFED87'}} variant="h6" noWrap>
                     Positively Charged       
-                </Typography>
+                </Typography> */}
             </div>
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
-                <Typography  style={{color: '#FFED87', marginLeft: '900px'}} variant="h6" noWrap>
+                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px'}} variant="h6" noWrap>
                     Welcome {props.currentUser.username}  
                 </Typography>
             </div>

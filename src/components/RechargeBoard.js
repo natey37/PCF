@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import charge from '../styling/charge.png'
 import TagSelector2 from '../components/TagSelector2.js'
 import { Link } from 'react-router-dom'
+import Tooltip from '@material-ui/core/Tooltip';
+
 class RechargeBoard extends React.Component {
 
     state = {
@@ -71,23 +73,28 @@ class RechargeBoard extends React.Component {
                 let matchingIDs = matching.map(chargetag => chargetag.sentcharge_id)
                 let matchingSentCharge = this.state.filteredResps.filter(sentcharge => 
                     matchingIDs.includes(sentcharge.id))
-                let newMessage = this.sample(matchingSentCharge).message
-                this.setState({
-                    todaysMessage: newMessage
-                })
-                // this.setState({
-                //     todaysMessage: this.sample(matchingSentCharge).message
-                // })
-                // console.log(matchedTags)
-                // console.log(sentchargeTags)
+                if(matchingSentCharge.length > 0){
+                    let newMessage = this.sample(matchingSentCharge).message
+                    this.setState({
+                        todaysMessage: newMessage
+                    })
+                    console.log(newMessage)
+
+                    // this.setState({
+                    //     todaysMessage: this.sample(matchingSentCharge).message
+                    // })
+                    // console.log(matchedTags)
+                    // console.log(sentchargeTags)
+                    
+                }
                 console.log(nonEmptySentChargeTags)
-                // console.log(mapForMatchingTags)
-                console.log(matching)
-                console.log(matchingIDs)
-                console.log(this.state.filteredResps)
-                console.log(matchingSentCharge)
-                console.log(newMessage)
-                console.log(this.state.todaysMessage)
+                    // console.log(mapForMatchingTags)
+                    console.log(matching)
+                    console.log(matchingIDs)
+                    console.log(this.state.filteredResps)
+                    console.log(matchingSentCharge)
+                    console.log(this.state.todaysMessage)
+               
 
             })
         })
@@ -203,14 +210,16 @@ class RechargeBoard extends React.Component {
                 <Paper style={paper}>
                     
                         <h1 style={{fontSize: '30px', paddingTop: '30px',              fontFamily: 'Noto Sans' + "sans-serif"}}>Need To Re-Charge? </h1>
-                        <Button
-                            onClick={this.handleClick}
-                            variant="contained"
-                            color="primary"
-                            style={button}
-                                    
-                        >Your personal message awaits!
-                        </Button>
+                        <Tooltip title='Choose from the tags below to receive a message that is meant just for you!'>
+                            <Button
+                                onClick={this.handleClick}
+                                variant="contained"
+                                color="primary"
+                                style={button}
+                                        
+                            >Your personal message awaits!
+                            </Button>
+                        </Tooltip>
                         <br></br>
                         <br></br>
                         <textarea

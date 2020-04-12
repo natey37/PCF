@@ -56,11 +56,11 @@ export default function StickyHeadTable(props) {
   const rows = [
     createData('Today', 
         Math.round(props.time.daily * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={props.time.daily >= props.time.weekly ? up1 : down1}></img>
+        <img style={{height: '50px', width: '50px'}}src={props.time.daily >= props.time.yesterday ? up1 : down1}></img>
         ),
     createData('Yesterday',
         Math.round(props.time.yesterday * 100) / 100,  
-        <img style={{height: '50px', width: '50px'}}src={props.time.yesterday >= props.time.monthly ? up1 : down1}></img>),
+        <img style={{height: '50px', width: '50px'}}src={props.time.yesterday >= props.time.weekly ? up1 : down1}></img>),
     createData('This Week', 
         Math.round(props.time.weekly * 100) / 100, 
         <img style={{height: '50px', width: '50px'}}src={props.time.weekly >= props.time.allTime ? up1 : down1}></img>),

@@ -10,7 +10,8 @@ class RechargeBoard extends React.Component {
         recharge: false,
         charge: false,
         todaysMessage: '',
-        tags: 
+        filteredResps: [],
+        tags: []
     }
 
     componentDidMount(){
@@ -27,11 +28,17 @@ class RechargeBoard extends React.Component {
            
                 //filter sentcharges that match todays number of month
             let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay)
+           
+                // if(this.state.tags.length > 0 ){
+
+                // }
+              
             
             let todaysMessage = this.sample(filteredResps)
             console.log(todaysMessage)
             this.setState({
-                todaysMessage: todaysMessage.message
+                todaysMessage: todaysMessage.message,
+                filteredResps: filteredResps
             })
         })
     }
@@ -44,9 +51,81 @@ class RechargeBoard extends React.Component {
         values.map(value => {
             this.setState({
                 tags: [...this.state.tags, value]
+            }, () => {
+                let matchedTags = this.state.filteredResps.filter(sentcharge => sentcharge.chargetags.length > 0)
+                let sentchargeTags = this.state.filteredResps.map(sentcharge => sentcharge.chargetags)
+                let nonEmptySentChargeTags = sentchargeTags.filter(arr => arr.length > 0)
+                let matching = []
+                let mapForMatchingTags = nonEmptySentChargeTags.forEach( arr => {
+                    console.log(arr)
+                    arr.forEach(chargetag => {
+                        console.log(chargetag)
+                        console.log(chargetag.tagtype)
+                        console.log(this.state.tags)
+                        if(this.state.tags.includes(chargetag.tagtype)){
+                            console.log("got inside")
+                            matching.push(chargetag)
+                        }
+                    })
+                })
+                let matchingIDs = matching.map(chargetag => chargetag.sentcharge_id)
+                let matchingSentCharge = this.state.filteredResps.filter(sentcharge => 
+                    matchingIDs.includes(sentcharge.id))
+                let newMessage = this.sample(matchingSentCharge).message
+                this.setState({
+                    todaysMessage: newMessage
+                })
+                // this.setState({
+                //     todaysMessage: this.sample(matchingSentCharge).message
+                // })
+                // console.log(matchedTags)
+                // console.log(sentchargeTags)
+                console.log(nonEmptySentChargeTags)
+                // console.log(mapForMatchingTags)
+                console.log(matching)
+                console.log(matchingIDs)
+                console.log(this.state.filteredResps)
+                console.log(matchingSentCharge)
+                console.log(newMessage)
+                console.log(this.state.todaysMessage)
+
             })
         })
+        
        
+        
+
+      
+        // let matchedTags = this.state.filteredResps.filter(sentcharge => {
+        //     console.log(sentcharge.chargetags)
+        //     if(this.state.tags.length === 0){
+        //         console.log('HI im in first conditional')
+        //         return sentcharge
+                
+        //     } else if (this.state.tags.length > 0 && !sentcharge.chargetags){
+        //         console.log('HI im in second conditional')
+
+        //         return sentcharge
+        //     } else {
+        //         let types = sentcharge.chargetags.map(tag => tag.type)
+        //         console.log('HI im in third conditional')
+
+        //         console.log(types)
+        //         console.log(sentcharge)
+        //         console.log(sentcharge.chargetags)
+        //         types.forEach((type) => {
+        //             if(this.state.tags.includes(type)){
+        //                 return sentcharge
+        //             }
+        //         })
+        //     }
+            // console.log(matchedTags)
+        
+       
+    }
+
+    matchTags = () => {
+
     }
 
 
@@ -74,7 +153,7 @@ class RechargeBoard extends React.Component {
     }
 
     render(){
-        console.log(this.state.todaysMessage)
+        // console.log(this.state.tags)
         const  paper= {
             backgroundColor: 'rgba(255, 237, 135, 1)',
             margin: 'auto',

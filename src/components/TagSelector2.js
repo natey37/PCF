@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function Tags() {
+export default function Tags(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Autocomplete
+        onChange={props.handleChange}
         className={classes.selector}
         multiple
         id="tags-outlined"

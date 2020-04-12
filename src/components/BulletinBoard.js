@@ -8,13 +8,16 @@ import atom from '../styling/atom.png'
 import Button from '@material-ui/core/Button';
 import Moment from 'react-moment';
 import charge from '../styling/charge.png';
-
+import positive1 from '../styling/positive1.png'
+import neutral1 from '../styling/neutral1.png'
 
 class BulletinBoard extends React.Component {
 
   state = {
       likes: '',
-      switch: false
+      switch: false,
+      background: false
+
   }
 
   componentDidMount(){
@@ -51,12 +54,20 @@ class BulletinBoard extends React.Component {
     })
   }
 
-  handleBothClickEvents = () => {
+  handleBackgroundChange = () => {
+    this.setState({
+      background: true
+    })
+  }
+
+  handleAllClickEvents = () => {
     this.handleLike()
     this.handleSwitch()
+    this.handleBackgroundChange()
   }
  
   render(){
+    console.log(this.props)
     
      const root= {
         flexGrow: 1,
@@ -72,8 +83,8 @@ class BulletinBoard extends React.Component {
       }
       
     const image= {
-        width: 128,
-        height: 128,
+        width: 150,
+        height: 150,
       }
     const  img= {
         margin: 'auto',
@@ -81,6 +92,26 @@ class BulletinBoard extends React.Component {
         maxWidth: '100%',
         maxHeight: '100%',
       }
+
+      const   button= {
+        fontFamily: 'Noto Sans' + "sans-serif",
+
+        height: '40px',
+        width: '150px',
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        boxShadow: '2px 2px #BAAD63',
+        fontSize: '16px',
+    }
+
+    const   button1= {
+      fontFamily: 'Noto Sans' + "sans-serif",
+
+      height: '40px',
+      width: '150px',
+      background: 'linear-gradient(45deg, #F8FC00 30%, #FF8E53 90%)',
+      boxShadow: '2px 2px #BAAD63',
+      fontSize: '16px',
+  }
       return (
         <div style={root}>
           <br></br>
@@ -89,21 +120,43 @@ class BulletinBoard extends React.Component {
             <Grid container spacing={2}>
               <Grid item>
                 <ButtonBase style={image}>
-                  <img style={img} alt="complex" src={atom} />
+                  {this.props.message.sentiment_score > 0.3 ? 
+                      <img style={img} alt="positive" src={positive1} />
+                  :
+                      <img style={img} alt="complex" src={neutral1} />
+                }
                 </ButtonBase>
               </Grid>
               <Grid item xs={12} sm container style={{marginRight: "140px"}}>
                 <Grid item xs container direction="column" spacing={2}>
                   <Grid item xs>
-                    <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
+                    <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px'}}>
                       {this.props.message.username}
                     </Typography>
-                    <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '15px'}}>
+                    <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
                       {this.props.message.message}
                     </Typography>
                     <br></br>
-                    <Button onClick={() => this.handleBothClickEvents()} >
-                      
+
+                    {!this.state.background ? 
+                      <Button style={button} onClick={() => this.handleAllClickEvents()} >
+                        
+                        {this.state.switch ? 
+                        <div>
+                          Charge: {this.state.likes}
+                          <img src={charge} style={{width: '20px', height: '20px'}}></img> 
+                        </div>
+                        :
+                        <div>
+                          <img src={charge} style={{width: '20px', height: '20px'}}></img> 
+                          Charge: {this.state.likes}
+                        </div>
+                      }
+                      {/* charge: {this.state.likes} */}
+                      </Button>
+                    : 
+                      <Button style={button1} onClick={() => this.handleAllClickEvents()} >
+                        
                       {this.state.switch ? 
                       <div>
                         Charge: {this.state.likes}
@@ -116,7 +169,13 @@ class BulletinBoard extends React.Component {
                       </div>
                     }
                     {/* charge: {this.state.likes} */}
-                    </Button>
+                      </Button>
+                    }
+                      
+
+
+
+                    
                   </Grid>
                   <Grid item>
                     {/* <Typography variant="body2" style={{ cursor: 'pointer' }}>

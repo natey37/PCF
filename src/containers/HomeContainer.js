@@ -93,13 +93,13 @@ class HomeContainer extends React.Component {
 
                 <div style={row}>
                    <div style={column}>
-                        <img style={{width: '40px', height: '40px', marginRight: '280px'}} src={pin_flipped} alt="Snow" />
+                        <img style={{width: '40px', height: '40px', marginRight: '280px'}} src={pin_flipped} alt="pinleft" />
                     </div>
                     <div style={column}>
                         <HomeFilter></HomeFilter>
                     </div>
                     <div style={column}>
-                        <img style={{width: '40px', height: '40px', marginLeft: '280px' }} src={home_pin} alt="Mountains"/>
+                        <img style={{width: '40px', height: '40px', marginLeft: '280px' }} src={home_pin} alt="pinright"/>
                     </div>
                 </div>
 

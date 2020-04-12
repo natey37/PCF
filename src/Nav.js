@@ -26,6 +26,8 @@ import login from './styling/login.png'
 import { Link } from "react-router-dom";
 import title from './styling/title.png'
 import titlewhite from './styling/titlewhite.png'
+import thunder from './styling/thunder.png'
+
 
 
 
@@ -96,8 +98,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
 },
  column: {
-    flex: '33%', 
-    padding: '5px'
+    flex: '30%', 
+    padding: '0px'
 }
 }));
 
@@ -147,12 +149,16 @@ export default function MiniDrawer(props) {
             </div>
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
-                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px'}} variant="h6" noWrap>
+                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px' }} variant="h6" noWrap>
                     Welcome {props.currentUser.username}  
+                    
                 </Typography>
             </div>
             }   
-
+            <div>
+                <img style={{height: '30px', width: '30px', marginTop: '14px', marginRight: '40px'}}src={thunder}></img>
+            </div>
+            
           </div>
           {/* <div style={row}>
                    <div style={column}>

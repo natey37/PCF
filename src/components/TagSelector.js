@@ -54,26 +54,38 @@ class TagSelector extends React.Component {
 }
 
 const tagOptions = [
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
+    { tag: 'Achievement'}, 
     { tag: 'Family'}, 
-    { tag: 'Inspirational'}, 
-    { tag: 'Self Care'}, 
+    { tag: 'Friendship'}, 
+    { tag: 'Inspiration'}, 
+    { tag: 'Happiness'}, 
+    { tag: 'Heartfelt'}, 
+    { tag: 'Humanity'}, 
+    { tag: 'Humor'}, 
+    { tag: 'Kudos'}, 
     { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
     { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
+    { tag: 'Self Esteem'},
+    { tag: 'Self Improvment'},
+    { tag: 'Serious'}, 
+    { tag: 'Silly'}, 
+    
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 ];
 

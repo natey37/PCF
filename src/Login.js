@@ -14,7 +14,7 @@ class Login extends React.Component {
     // backgroundColor: '#008080'
     return (
       <div >
-          {this.props.currentUser && <Redirect to='/home'/>}
+          {/* {this.props.currentUser && <Redirect to='/home'/>} */}
     
 
         <br></br>

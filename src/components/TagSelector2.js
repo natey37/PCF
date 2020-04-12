@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   selector: {
       backgroundColor: '#FFED87'
   },
+  selector1: {
+    backgroundColor: 'red',
+    color: 'red'
+},
 
 }));
 
@@ -32,6 +36,8 @@ export default function Tags(props) {
       <Autocomplete
         onChange={props.handleChange}
         className={classes.selector}
+        // PaperComponent={classes.selector1}
+        autoComplete={true}
         multiple
         id="tags-outlined"
         options={tagOptions}
@@ -53,25 +59,21 @@ export default function Tags(props) {
 }
 
 const tagOptions = [
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
+    { tag: 'Achievement'}, 
     { tag: 'Family'}, 
-    { tag: 'Inspirational'}, 
-    { tag: 'Self Care'}, 
+    { tag: 'Friendship'}, 
+    { tag: 'Inspiration'}, 
+    { tag: 'Happiness'}, 
+    { tag: 'Heartfelt'}, 
+    { tag: 'Humanity'}, 
+    { tag: 'Humor'}, 
+    { tag: 'Kudos'}, 
     { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
     { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
-    { tag: 'Self Care'}, 
-    { tag: 'Motivation'}, 
-    { tag: 'Family'}, 
-    { tag: 'Inspirational'},
+    { tag: 'Self Esteem'},
+    { tag: 'Self Improvment'},
+    { tag: 'Serious'}, 
+    { tag: 'Silly'}, 
+    
 
 ];

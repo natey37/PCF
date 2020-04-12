@@ -13,7 +13,8 @@ class RechargeBoard extends React.Component {
         charge: false,
         todaysMessage: '',
         filteredResps: [],
-        tags: []
+        tags: [], 
+        background: false 
     }
 
     componentDidMount(){
@@ -147,10 +148,20 @@ class RechargeBoard extends React.Component {
         return number_of_month
     }
 
+    handleBackgroundChange = () => {
+        this.setState({
+            background: true 
+        })
+    }
     handleClick = () => {
         this.setState({
             recharge: true
         })
+    }
+
+    handleBothClicks = () => {
+        this.handleChargeClick()
+        this.handleBackgroundChange()
     }
 
     handleChargeClick = () => {
@@ -183,7 +194,8 @@ class RechargeBoard extends React.Component {
             height: '40px',
             width: '150px',
             background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-            boxShadow: '2px 2px #BAAD63'
+            boxShadow: '2px 2px #BAAD63',
+            color: 'black'
           }
           const h3= {
             fontFamily: 'Noto Sans' + "sans-serif",
@@ -205,6 +217,15 @@ class RechargeBoard extends React.Component {
             fontSize: "15px",
             backgroundColor: '#FFFFFF'
           };
+          const   button1= {
+            fontFamily: 'Noto Sans' + "sans-serif",
+      
+            height: '40px',
+            width: '150px',
+            background: 'linear-gradient(45deg, #F8FC00 30%, #FF8E53 90%)',
+            boxShadow: '2px 2px #BAAD63',
+            color: 'black'
+        }
         return(
             <div>
                 <Paper style={paper}>
@@ -244,22 +265,42 @@ class RechargeBoard extends React.Component {
                         <div>
                             <h3 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>If that helped give you the recharge you needed, press the charge button!
                             </h3>
-                            <Button
-                                onClick={this.handleChargeClick}
-                                variant="contained"
-                                color="primary"
-                                style={chargeButton}
-                                        
-                            >
-                                {this.state.charge ? 
-                                <div> Charge: 1  
-                                    <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                                </div>
-                                :<div>
-                                    <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                                    Charge
-                                </div>}
-                            </Button>
+                    {!this.state.background ? 
+                        <Button
+                        onClick={this.handleBothClicks}
+                        variant="contained"
+                        color="primary"
+                        style={chargeButton}
+                                
+                    >
+                        {this.state.charge ? 
+                        <div> Charge: 1  
+                            <img src={charge} style={{height: '15px', width: '15px'}}></img>
+                        </div>
+                        :<div>
+                            <img src={charge} style={{height: '15px', width: '15px'}}></img>
+                            Charge
+                        </div>}
+                        </Button>
+                    :
+                        <Button
+                            onClick={this.handleBothClicks}
+                            variant="contained"
+                            color="primary"
+                            style={button1}
+                                    
+                        >
+                            {this.state.charge ? 
+                            <div> Charge: 1  
+                                <img src={charge} style={{height: '15px', width: '15px'}}></img>
+                            </div>
+                            :<div>
+                                <img src={charge} style={{height: '15px', width: '15px'}}></img>
+                                Charge
+                            </div>}
+                        </Button>
+                    }
+                            
                         </div>
                             <br></br>
                             <br></br>

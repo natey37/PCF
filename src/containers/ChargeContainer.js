@@ -28,6 +28,12 @@ class ChargeContainer extends React.Component {
        
     }
 
+    resetValues = () => {
+        this.setState({
+            values: {}
+        })
+    }
+
     render(){
         console.log(this.state.values)
         const paper = {
@@ -54,7 +60,7 @@ class ChargeContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-            <MessageBoard currentUser={this.props.currentUser} values={this.state.values}/>                
+            <MessageBoard reset={this.resetValues} currentUser={this.props.currentUser} values={this.state.values}/>                
                 <br></br>
                 
                 
@@ -67,7 +73,7 @@ class ChargeContainer extends React.Component {
             <h3 style={h3}>Help us share your positivity with someone who needs it most!</h3>
             <br></br>
             <br></br>
-            <TagSelector handleChange={this.handleValuesChange} />
+            <TagSelector  handleChange={this.handleValuesChange} />
            
 
             {/* </Container> */}

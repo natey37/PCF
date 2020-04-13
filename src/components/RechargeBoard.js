@@ -35,7 +35,7 @@ class RechargeBoard extends React.Component {
                 // if(this.state.tags.length > 0 ){
 
                 // }
-              
+              console.log(filteredResps)
             if(filteredResps.length > 0 ){
                 let todaysMessage = this.sample(filteredResps)
                 console.log(todaysMessage)

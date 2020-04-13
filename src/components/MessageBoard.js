@@ -146,6 +146,8 @@ class MessageBoard extends React.Component {
                             console.log(resp)
                             console.log(this.props.values)
                             this.makeTags(resp)
+                            this.props.reset()
+
                        })
                    })
                 } else if (resp.score >= 0 && resp.score < 0.3) {
@@ -176,7 +178,9 @@ class MessageBoard extends React.Component {
                             // console.log(resp.sentcharge.id)
                             console.log(resp)
                             // console.log(this.props.values)
+                        
                             this.makeTags(resp)
+                            this.props.reset()
                        })
                    })
                 } else if (resp.score < 0) {

@@ -16,13 +16,23 @@ class BulletinBoard extends React.Component {
   state = {
       likes: '',
       switch: false,
-      background: false
+      background: false, 
+      edit: false,
+      message: ''
 
   }
 
   componentDidMount(){
     this.setState({
-      likes: this.props.message.likes
+      likes: this.props.message.likes,
+      message: this.props.message.message
+    })
+  }
+
+  handleMessageChange = (event) => {
+    event.preventDefault()
+    this.setState({
+      message: event.target.value
     })
   }
 
@@ -70,6 +80,46 @@ class BulletinBoard extends React.Component {
     }
    
   }
+
+  handleEdit = () =>  {
+    console.log('inside'
+    )
+    this.setState({
+      edit: true 
+    })
+  }
+
+    editButton = () => {
+      return (
+        <Button onClick={this.handleEdit}>
+            Edit
+        </Button>
+      )
+    }
+
+    handleResend = () => {
+      fetch(`http://localhost:3000/sentcharges/${this.props.message.id}`, {
+          method: "PATCH", 
+          headers: {
+              'Content-Type': 'application/json'
+          }, 
+          body: JSON.stringify({message: this.state.message})
+      })
+      .then(resp => resp.json()).then(resp => {
+        console.log(resp)
+        this.setState({
+          edit: false
+        })
+      })
+    }
+
+    resendButton = () => {
+      return (
+        <Button onClick={this.handleResend}>
+            Resend
+        </Button>
+      )
+    }
  
   render(){
     console.log(this.props)
@@ -117,6 +167,19 @@ class BulletinBoard extends React.Component {
       boxShadow: '2px 2px #BAAD63',
       fontSize: '16px',
   }
+  const style = {
+    fontFamily: 'Noto Sans' + "sans-serif",
+
+    textAlign: 'center',
+    width: 400, 
+    maxHeight: "115px",
+    minHeight: "38px",
+    resize: "none",
+    padding: "9px",
+    boxSizing: "border-box",
+    fontSize: "15px",
+    backgroundColor: '#FFFFFF'
+  };
   console.log(this.props.message)
       return (
         <div style={root}>
@@ -139,9 +202,21 @@ class BulletinBoard extends React.Component {
                     <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px'}}>
                       {this.props.message.username}
                     </Typography>
-                    <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
-                      {this.props.message.message}
-                    </Typography>
+                    {this.state.edit ? 
+                        <textarea
+                        spellcheck="false"
+                        onChange={event => this.handleMessageChange(event)}
+                        style={style}
+                        ref={c => (this.textarea = c)}
+                        rows={1}
+                        value={this.state.message}
+                      />
+                    :
+                      <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
+                        {this.state.message}
+                      </Typography>
+                  }
+                    
                     <br></br>
 
                     {!this.state.background ? 
@@ -194,6 +269,17 @@ class BulletinBoard extends React.Component {
                           </Grid>
                         :
                         null
+                    }
+                     {this.props.message.user_id === parseInt(localStorage.user_id ) ? 
+                          
+                          <Grid item>
+                            {!this.state.edit ? this.editButton() : this.resendButton()}
+                              {/* <Button onClick={this.handleEdit}>
+                                {this.state.edit ? "Resend!" : "Edit"}
+                              </Button> */}
+                          </Grid>
+                        :
+                       null
                     }
                     
                     <Typography variant="body2" color="textSecondary" style={{     fontFamily: 'Noto Sans' + "sans-serif", marginLeft: '360px'}}>

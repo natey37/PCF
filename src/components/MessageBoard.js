@@ -262,7 +262,7 @@ class MessageBoard extends React.Component {
             right: '50%', 
             width: '700px',
             height: '400px',
-            marginTop: '150px'
+            marginTop: '100px'
             
         }
 

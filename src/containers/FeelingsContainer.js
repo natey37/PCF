@@ -46,16 +46,22 @@ class FeelingsContainer extends React.Component {
             //summing scores
             let todayScores = filteredResps.map(sentcharge => sentcharge.sentiment_score)
             //filter any nulls
-            let todayFiltered = todayScores.filter(function (el) {
-                return el != null;
-              });
-              const add1 = (a, b) =>
-                a + b
-              // use reduce to sum our array
-              const sum1 = todayFiltered.reduce(add1) / todayFiltered.length
-              this.setState({
-                  daily: sum1
-              })
+            console.log(todayScores)
+            if(todayScores.length > 0){
+                
+                let todayFiltered = todayScores.filter(function (el) {
+                    return el != null;
+                  });
+                  const add1 = (a, b) =>
+                    a + b
+                  // use reduce to sum our array
+                  const sum1 = todayFiltered.reduce(add1) / todayFiltered.length
+                  this.setState({
+                      daily: sum1
+                  })
+
+            }
+           
         //finding yesterdays score 
         let yesterday = thisDate.setDate(thisDate.getDate() - 1);
         let test = new Date(yesterday)

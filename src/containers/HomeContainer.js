@@ -25,6 +25,25 @@ class HomeContainer extends React.Component {
         })
     }
 
+    deletePost = (event, id) => {
+        event.preventDefault()
+        console.log(id)
+        fetch(`http://localhost:3000/sentcharges/${id}`, {
+            method: "DELETE", 
+            headers: {
+                'Content-Type': 'application/json'
+                    }
+        }).then(resp => resp.json())
+        .then(resp => {
+            console.log(resp)
+            let newSortedMessages = this.state.messages.filter(message => message.id !== id)
+            console.log(newSortedMessages)
+            this.setState({
+                messages: newSortedMessages
+            })
+        })
+    }
+
     render(){
 
         const container = {
@@ -103,7 +122,7 @@ class HomeContainer extends React.Component {
                     </div>
                 </div>
 
-                {this.state.messages.map((message, index) => <BulletinBoard key={index}message={message}/>)}
+                {this.state.messages.map((message, index) => <BulletinBoard key={index}message={message} delete={this.deletePost}/>)}
                 {/* <h1 style={{textDecoration: 'underline'}}>Bulletin Board</h1> */}
                 {/* <BulletinBoard/>
                 <br></br>

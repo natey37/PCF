@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import positive from '../styling/positive.png'
+import sidewaysthunder2 from '../styling/sidewaysthunder2.png'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     maxHeight: '100%',
   },
+  row: {
+    display: 'flex'
+},
+ column: {
+    flex: '30%', 
+    padding: '0px'
+}
 }));
 
 export default function LeaderGrid2(props) {
@@ -43,9 +51,23 @@ export default function LeaderGrid2(props) {
           </Grid>
           <Grid item xs={12} sm container >
              
-             <Grid xs={5}>
+             <Grid xs={6}>
                 <br></br>
-                 <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '40px', fontStyle: 'italic', marginTop: '10px'}}>{props.leader[2]}</Typography>
+            <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '40px', fontStyle: 'italic', marginTop: '10px'}}>
+
+                #{props.index + 1} {props.leader[2]}
+            {/* <div className={classes.row}>
+                <div className={classes.column}>
+                    {props.index + 1}
+                </div>
+                <div className={classes.column}>
+                    <img style={{height:'70px', width: '70px', paddingBottom: '20px'}}src={sidewaysthunder2}></img>
+                </div>
+                <div className={classes.column}>
+                    {props.leader[2]}
+                </div>
+            </div> */}
+                </Typography>
              </Grid>
             
              <Grid xs={3}>
@@ -56,7 +78,7 @@ export default function LeaderGrid2(props) {
                 
                  <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold'}}>Charges:      <div style={{fontSize: '30px'}}>{props.leader[1]}</div> </Typography>
              </Grid>
-             <Grid xs={4}>
+             <Grid xs={3}>
                  <br></br>
                  <br></br>
                  <br></br>

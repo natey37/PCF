@@ -36,13 +36,20 @@ class RechargeBoard extends React.Component {
 
                 // }
               
+            if(filteredResps.length > 0 ){
+                let todaysMessage = this.sample(filteredResps)
+                console.log(todaysMessage)
+                this.setState({
+                    todaysMessage: todaysMessage.message,
+                    filteredResps: filteredResps
+                })
+            } else {
+                this.setState({
+                    todaysMessage: 'No one has written a message yet today! Check back soon!',
+                    filteredResps: filteredResps
+                })
+            }
             
-            let todaysMessage = this.sample(filteredResps)
-            console.log(todaysMessage)
-            this.setState({
-                todaysMessage: todaysMessage.message,
-                filteredResps: filteredResps
-            })
         })
     }
 
@@ -200,8 +207,8 @@ class RechargeBoard extends React.Component {
           const h3= {
             fontFamily: 'Noto Sans' + "sans-serif",
 
-              position: 'absolute',
-              left: '500px',
+              position: 'relative',
+            
               color: 'white'
           }
           const style = {
@@ -261,6 +268,13 @@ class RechargeBoard extends React.Component {
                         <br></br>
                         
                 </Paper>
+            
+                        <h3 style={h3}>Add tags to help filter content that is most suited to your needs!</h3>
+                        <div>
+                            <TagSelector2 handleChange={this.handleValuesChange}/>
+                        </div>
+                        <br></br>
+                        <br></br>
                         <br></br>
                         <div>
                             <h3 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>If that helped give you the recharge you needed, press the charge button!
@@ -306,11 +320,7 @@ class RechargeBoard extends React.Component {
                             <br></br>
                             <Link to='/charge' style={{color: 'white', fontSize: '15px', fontFamily: 'Noto Sans' + "sans-serif"}}>Send a charge!</Link>
                             <br></br>
-                        <div>
-                            <h3 style={h3}>Add tags to help filter content that is most suited to your needs!</h3>
-                            
-                            <TagSelector2 handleChange={this.handleValuesChange}/>
-                        </div>
+                       
                    
                         
             </div>

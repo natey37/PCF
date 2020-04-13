@@ -154,10 +154,13 @@ export default function MiniDrawer(props) {
                     
                 </Typography>
             </div>
-            }   
-            <div>
-                <img style={{height: '30px', width: '30px', marginTop: '14px', marginRight: '40px'}}src={thunder}></img>
-            </div>
+            } 
+            {props.currentUser === null ? null :
+                <div>
+                    <img style={{height: '30px', width: '30px', marginTop: '14px', marginRight: '40px'}}src={thunder}></img>
+                </div>
+            }  
+            
             
           </div>
           {/* <div style={row}>

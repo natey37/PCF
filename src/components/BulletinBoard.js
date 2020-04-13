@@ -61,9 +61,14 @@ class BulletinBoard extends React.Component {
   }
 
   handleAllClickEvents = () => {
-    this.handleLike()
-    this.handleSwitch()
-    this.handleBackgroundChange()
+    console.log(this.props.message.user_id)
+    console.log(localStorage.user_id)
+    if(this.props.message.user_id !== parseInt(localStorage.user_id)){
+      this.handleLike()
+      this.handleSwitch()
+      this.handleBackgroundChange()
+    }
+   
   }
  
   render(){
@@ -112,6 +117,7 @@ class BulletinBoard extends React.Component {
       boxShadow: '2px 2px #BAAD63',
       fontSize: '16px',
   }
+  console.log(this.props.message)
       return (
         <div style={root}>
           <br></br>
@@ -177,23 +183,30 @@ class BulletinBoard extends React.Component {
 
                     
                   </Grid>
+                
+                  
                   <Grid item>
-                    {/* <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                      Like
-                    </Typography> */}
+                      {this.props.message.user_id === parseInt(localStorage.user_id) ? 
+                          <Grid item>
+                              <Button onClick={event => this.props.delete(event, this.props.message.id)}>
+                                Delete
+                              </Button>
+                          </Grid>
+                        :
+                        null
+                    }
                     
                     <Typography variant="body2" color="textSecondary" style={{     fontFamily: 'Noto Sans' + "sans-serif", marginLeft: '360px'}}>
-                        <Moment format="DD/MM/YY HH:mm:ss">
+                        <Moment format="D MMM YYYY HH:mm:ss">
                             {this.props.message.created_at}
 
                         </Moment>
                     </Typography>
+                    
                   </Grid>
 
                 </Grid>
-                {/* <Grid item>
-                  <Typography variant="subtitle1">$19.00</Typography>
-                </Grid> */}
+                    
               </Grid>
             </Grid>
           </Paper>

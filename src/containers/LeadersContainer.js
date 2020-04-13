@@ -135,7 +135,7 @@ class LeadersContainer extends React.Component {
                 <Filter></Filter>
                 <br></br>
                    
-                    {this.state.leaders.map(leader => <LeaderGrid2 leader={leader}/>) }
+                    {this.state.leaders.map((leader, index) => <LeaderGrid2 index={index} leader={leader}/>) }
                 </Container>
 
                               

@@ -9,7 +9,8 @@ class FeelingsContainer extends React.Component {
         weekly: '', 
         monthly: '',
         allTime: '',
-        yesterday: ''
+        yesterday: '',
+        allTimeYesterday: ''
     }
 
     componentDidMount(){
@@ -17,7 +18,27 @@ class FeelingsContainer extends React.Component {
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp)
+            //get todays date
+            let thisDate = new Date()
+            let thisDateDay = thisDate.getDate()
+            //finding all time scores yesterday 
+            let newResps = resp.map(sentcharge => 
+                { return {...sentcharge, created_at: this.convertToDay(sentcharge.created_at)}}
+            )
+            let filteredYesterdayAllTimeResps = newResps.filter(sentcharge => sentcharge.created_at !== thisDateDay)
+            let scoresMapped = filteredYesterdayAllTimeResps.map(resp => resp.sentiment_score)
 
+            let filteredYesterdayAllTime = scoresMapped.filter(function (el) {
+                return el != null;
+              });
+            const add10 = (a, b) => a + b 
+            console.log(filteredYesterdayAllTime)
+            const sum10 = filteredYesterdayAllTime.reduce(add10) / filteredYesterdayAllTime.length
+            console.log(sum10)
+            this.setState({
+                allTimeYesterday: sum10
+            })
+            console.log(this.state.allTimeYesterday)
             //finding all time scores
             let scores = resp.map(resp => resp.sentiment_score)
             let filtered = scores.filter(function (el) {
@@ -35,11 +56,10 @@ class FeelingsContainer extends React.Component {
               //finding daily score 
 
               //map created_at to number of month 
-            let newResps = resp.map(sentcharge => 
-                { return {...sentcharge, created_at: this.convertToDay(sentcharge.created_at)}}
-            )
-              let thisDate = new Date()
-              let thisDateDay = thisDate.getDate()
+            // let newResps = resp.map(sentcharge => 
+            //     { return {...sentcharge, created_at: this.convertToDay(sentcharge.created_at)}}
+            // )
+             
            
                 //filter sentcharges that match todays number of month
             let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay)

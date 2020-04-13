@@ -18,7 +18,8 @@ class BulletinBoard extends React.Component {
       switch: false,
       background: false, 
       edit: false,
-      message: ''
+      message: '',
+      favorite: false 
 
   }
 
@@ -120,6 +121,25 @@ class BulletinBoard extends React.Component {
         </Button>
       )
     }
+
+    handleFavorite = () => {
+      console.log('hi from favorite')
+      fetch('http://localhost:3000/favorites', {
+        method: "POST", 
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({user_id: parseInt(localStorage.user_id), sentcharge_id: this.props.message.id})
+      })
+      .then(resp => resp.json()).then(resp => {
+
+        console.log(resp)
+        this.setState({
+          favorite: true 
+        })
+      })
+    
+    }
  
   render(){
     console.log(this.props)
@@ -180,7 +200,7 @@ class BulletinBoard extends React.Component {
     fontSize: "15px",
     backgroundColor: '#FFFFFF'
   };
-  console.log(this.props.message)
+  console.log(this.props.message.id)
       return (
         <div style={root}>
           <br></br>
@@ -277,6 +297,16 @@ class BulletinBoard extends React.Component {
                               {/* <Button onClick={this.handleEdit}>
                                 {this.state.edit ? "Resend!" : "Edit"}
                               </Button> */}
+                          </Grid>
+                        :
+                       null
+                    }
+                     {this.props.message.user_id !== parseInt(localStorage.user_id ) ? 
+                          
+                          <Grid item>
+                            <Button onClick={this.handleFavorite}>
+                              {this.state.favorite ? "Saved!" : "Save"}
+                            </Button>
                           </Grid>
                         :
                        null

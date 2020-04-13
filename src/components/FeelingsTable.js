@@ -66,7 +66,7 @@ export default function StickyHeadTable(props) {
         <img style={{height: '50px', width: '50px'}}src={props.time.weekly >= props.time.allTime ? up1 : down1}></img>),
     createData('All Time', 
         Math.round(props.time.allTime * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={up1}></img>
+        <img style={{height: '50px', width: '50px'}}src={props.time.allTime > props.time.allTimeYesterday ? up1 : down1}></img>
         )
 
 

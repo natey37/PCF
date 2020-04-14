@@ -14,7 +14,8 @@ class RechargeBoard extends React.Component {
         todaysMessage: '',
         filteredResps: [],
         tags: [], 
-        background: false 
+        background: false,
+        swap: false
     }
 
     componentDidMount(){
@@ -30,7 +31,7 @@ class RechargeBoard extends React.Component {
               let thisDateDay = thisDate.getDate()
            
                 //filter sentcharges that match todays number of month
-            let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay)
+            let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay && sentcharge.user_id !== parseInt(localStorage.user_id))
            
                 // if(this.state.tags.length > 0 ){
 
@@ -161,6 +162,7 @@ class RechargeBoard extends React.Component {
         })
     }
     handleClick = () => {
+        this.handleSwap()
         this.setState({
             recharge: true
         })
@@ -177,6 +179,11 @@ class RechargeBoard extends React.Component {
         })
     }
 
+    handleSwap = () => {
+        this.setState({
+            swap: true
+        })
+    }
     render(){
         // console.log(this.state.tags)
         const  paper= {
@@ -192,6 +199,15 @@ class RechargeBoard extends React.Component {
             height: '40px',
             width: '300px',
             background: 'linear-gradient(45deg, #63E2C6 30%, #2A4494 90%)',
+            boxShadow: '2px 2px #BAAD63'
+
+        }
+        const button2= {
+            fontFamily: 'Noto Sans' + "sans-serif",
+
+            height: '40px',
+            width: '300px',
+            background: 'linear-gradient(45deg, #2A4494 30%, #63E2C6 90%)',
             boxShadow: '2px 2px #BAAD63'
 
         }
@@ -237,13 +253,13 @@ class RechargeBoard extends React.Component {
             <div>
                 <Paper style={paper}>
                     
-                        <h1 style={{fontSize: '30px', paddingTop: '30px',              fontFamily: 'Noto Sans' + "sans-serif"}}>Need To Re-Charge? </h1>
+                        <h1 style={{fontSize: '30px', paddingTop: '30px',              fontFamily: 'Noto Sans' + "sans-serif"}}>Need to Recharge? </h1>
                         <Tooltip title='Choose from the tags below to receive a message that is meant just for you!'>
                             <Button
                                 onClick={this.handleClick}
                                 variant="contained"
                                 color="primary"
-                                style={button}
+                                style={this.state.swap ? button2 : button}
                                         
                             >Your personal message awaits!
                             </Button>
@@ -269,7 +285,7 @@ class RechargeBoard extends React.Component {
                         
                 </Paper>
             
-                        <h3 style={h3}>Add tags to help filter content that is most suited to your needs!</h3>
+                        <h3 style={h3}>Add tags to help filter content that you would like to see today!</h3>
                         <div>
                             <TagSelector2 handleChange={this.handleValuesChange}/>
                         </div>
@@ -277,7 +293,7 @@ class RechargeBoard extends React.Component {
                         <br></br>
                         <br></br>
                         <div>
-                            <h3 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>If that helped give you the recharge you needed, press the charge button!
+                            {/* <h3 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>If that helped give you the recharge you needed, press the charge button!
                             </h3>
                     {!this.state.background ? 
                         <Button
@@ -313,7 +329,7 @@ class RechargeBoard extends React.Component {
                                 Charge
                             </div>}
                         </Button>
-                    }
+                    } */}
                             
                         </div>
                             <br></br>

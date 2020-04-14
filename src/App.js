@@ -66,6 +66,10 @@ logout = () => {
     currentUser: null 
   }, () => {
     localStorage.removeItem("user_id")
+    localStorage.removeItem("username")
+    localStorage.removeItem("id")
+
+
     this.props.history.push('/login')
   })
 }

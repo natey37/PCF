@@ -14,6 +14,8 @@ class HomeContainer extends React.Component {
         messages: [], 
         todaysMessages: [],
         filter: null, 
+        saved: [],
+        charged: []
         
     }
     
@@ -54,6 +56,40 @@ class HomeContainer extends React.Component {
         })
     }
 
+    removeFromFavorites = (message) => {
+        // console.log( "hi from removefromfavorites")
+        // console.log(message)
+        // console.log(message.id) 
+        // console.log(message.favorites)
+
+        if(message.favorites.length > 0 ){
+            let fav = message.favorites.filter(fav => fav.sentcharge_id === message.id && fav.user_id === parseInt(localStorage.user_id))
+            // console.log(fav)
+            let favID = fav[0].id
+            // console.log(favID)
+            fetch(`http://localhost:3000/favorites/${favID}`, {
+            method: "DELETE", 
+            headers: {
+                'Content-Type': 'application/json'
+                    }
+            }).then(resp => resp.json()).then(resp => {
+                // console.log(resp)
+                 let removed = this.state.messages.filter(fav => fav.id !== message.id)
+                 let removedID = this.state.saved.filter(id => id !== message.id)
+                //  console.log(removed)
+                 this.setState({
+                     messages: removed,
+                     saved: removedID
+                 })
+            
+            })
+        }
+        
+  
+  
+        
+      }
+
     // forceState = (messages) => {
     //     this.setState({
     //         messages: messages
@@ -66,16 +102,20 @@ class HomeContainer extends React.Component {
             filter: event.target.value
         }, () => {
             if(event.target.value === 'alltime'){
+                fetch('http://localhost:3000/sentcharges')
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        let sortedTopMessages = resp.sort((a,b) => a.likes > b.likes ? 1 : -1).reverse().slice(0,20)
+                        console.log(sortedTopMessages)
+                        
+                    //    this.forceState(sortedTopMessages)
+                        this.setState({
+                            messages: sortedTopMessages
+                        })
+                    })
                 
-                let sortedTopMessages = this.state.allmessages.sort((a,b) => a.likes > b.likes ? 1 : -1).reverse().slice(0,20)
-                console.log(sortedTopMessages)
-                
-            //    this.forceState(sortedTopMessages)
-                this.setState({
-                    messages: sortedTopMessages
-                })
 
-            } else if(event.target.value === 'today'){
+            } else if(event.target.value === 'recent'){
                 this.setState({
                     messages: this.state.todaysMessages
                 })
@@ -84,20 +124,42 @@ class HomeContainer extends React.Component {
                 .then(resp => resp.json())
                 .then(resp => {
                     console.log(resp)
+                    
+
+
                     let respWithCorrectID = resp.filter(message => message.user_id === parseInt(localStorage.user_id))
                     console.log(respWithCorrectID)
                     let favorite_ids = respWithCorrectID.map(fav => fav.sentcharge_id)
                     console.log(favorite_ids)
-                    let favs = this.state.allmessages.filter(message => favorite_ids.includes(message.id) )
-                    // let myFavs = favs.filter(message => message.user_id === parseInt(localStorage.user_id))
-                    console.log(favs)
-                    this.setState({
-                        messages: favs
+
+                    fetch('http://localhost:3000/sentcharges')
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        let favs = resp.filter(message => favorite_ids.includes(message.id) )
+                        // let myFavs = favs.filter(message => message.user_id === parseInt(localStorage.user_id))
+                        console.log(favs)
+                        this.setState({
+                            messages: favs
+                        })
                     })
+                   
                 })
             }
         }  
     )}  
+
+    handleFavs = (id) => {
+        this.setState({
+            saved: [...this.state.saved, id]
+        })
+    }
+
+    handleCharge = (id) => {
+        this.setState({
+            charged: [...this.state.charged, id]
+        })
+    }
+   
         // console.log("im in handlefilter")
         // console.log(event.target.value)
         // this.setState({
@@ -110,7 +172,7 @@ class HomeContainer extends React.Component {
     
 
     render(){
-        console.log(this.state.messages)
+        console.log(this.state.charged)
         const container = {
             height: '70vh',
             overflow: 'auto',
@@ -187,7 +249,7 @@ class HomeContainer extends React.Component {
                     </div>
                 </div>
 
-                {this.state.messages.map((message, index) => <BulletinBoard key={index}message={message} delete={this.deletePost} filter={this.state.filter}/>)}
+                {this.state.messages.map((message, index) => <BulletinBoard key={index}message={message} delete={this.deletePost} filter={this.state.filter} removeFromFavorites={this.removeFromFavorites} saved={this.state.saved}handleFavs={this.handleFavs} handleCharge={this.handleCharge} charged={this.state.charged}/>)}
                 {/* <h1 style={{textDecoration: 'underline'}}>Bulletin Board</h1> */}
                 {/* <BulletinBoard/>
                 <br></br>

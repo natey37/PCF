@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 import title from './styling/title.png'
 import titlewhite from './styling/titlewhite.png'
 import thunder from './styling/thunder.png'
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -149,7 +150,8 @@ export default function MiniDrawer(props) {
             </div>
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
-                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px' }} variant="h6" noWrap>
+                  
+                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px', fontFamily: 'Noto Sans' + "sans-serif"}} variant="h6" noWrap>
                     Welcome {props.currentUser.username}  
                     
                 </Typography>
@@ -205,7 +207,9 @@ export default function MiniDrawer(props) {
           {['Bulletin Board'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-              <Link to="/home"><img style={{width: '40px', height: '40px'}}src={home_pin}></img></Link>
+              <Link to="/home">
+                <Tooltip title='Bulletin Board'><img style={{width: '40px', height: '40px'}}src={home_pin}></img></Tooltip>
+                </Link>
                 {/* {fix sizing and font} */}
                 <Link to="/home"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
@@ -217,7 +221,9 @@ export default function MiniDrawer(props) {
            {['Charge'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-              <Link to="/charge"><img style={{width: '40px', height: '40px'}}src={charge}></img></Link>
+              <Link to="/charge">
+                <Tooltip title="Send a Charge"><img style={{width: '40px', height: '40px'}}src={charge}></img></Tooltip>
+                </Link>
                 {/* {fix sizing} */}
                 <Link to="/charge"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
@@ -229,7 +235,9 @@ export default function MiniDrawer(props) {
            {['Recharge'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-              <Link to="/recharge"><img style={{width: '40px', height: '40px'}}src={recharge}></img></Link>
+              <Link to="/recharge">
+                <Tooltip title='Recharge'><img style={{width: '40px', height: '40px'}}src={recharge}></img></Tooltip>
+                </Link>
                 {/* {fix sizing and font} */}
                 <Link to="/recharge"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
@@ -245,7 +253,9 @@ export default function MiniDrawer(props) {
             {['Feelings'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>
-                <Link to="/feelings"><img style={{width: '40px', height: '40px'}}src={sentiment}></img></Link>
+                <Link to="/feelings">
+                  <Tooltip title='Feelings!'><img style={{width: '40px', height: '40px'}}src={sentiment}></img></Tooltip>
+                  </Link>
                     {/* {fix sizing and font} */}
                     <Link to="/feelings"><ListItemText style={{paddingLeft: "40px", fontWeight: "bold"}}primary={text} /></Link>
                 </ListItemIcon>
@@ -257,7 +267,9 @@ export default function MiniDrawer(props) {
                 {['Leaders'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>
-                <Link to="/leaders"><img style={{width: '40px', height: '40px'}}src={leaders}></img></Link>
+                <Link to="/leaders">
+                  <Tooltip title='Leaders'><img style={{width: '40px', height: '40px'}}src={leaders}></img></Tooltip>
+                  </Link>
                     {/* {fix sizing and font} */}
                     <Link to="/leaders"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
                 </ListItemIcon>
@@ -271,7 +283,9 @@ export default function MiniDrawer(props) {
                     <ListItem  button key={text}>
                     <ListItemIcon>
                         <Link to="/login">
+                         <Tooltip title='Log In'>
                         <img style={{width: '40px', height: '40px'}} src={login}></img>
+                        </Tooltip>
                         </Link>
                         {/* {fix sizing and font} */}
                         <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
@@ -282,7 +296,9 @@ export default function MiniDrawer(props) {
             ['Log Out'].map((text, index) => (
                 <ListItem  button key={text}>
                 <ListItemIcon>
+                  <Tooltip title='Log Out'>
                     <img onClick={props.logout} style={{width: '40px', height: '40px'}}src={logout}></img>
+                  </Tooltip>
                     {/* {fix sizing and font} */}
                     <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
                 </ListItemIcon>

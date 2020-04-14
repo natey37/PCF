@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
  
-    console.log(props.filter)
   return (
     <div>
       <FormControl   className={classes.formControl} >
@@ -44,7 +43,7 @@ export default function SimpleSelect(props) {
              onChange={event => props.onChange(event)}
           className={classes.select}
         >
-          <MenuItem className={classes.menuItem} value={'today'} name="today">Today</MenuItem>
+          <MenuItem className={classes.menuItem} value={'recent'} name="recent">Recent</MenuItem>
           <MenuItem className={classes.menuItem} value={'alltime'}name='allTime'>All Time</MenuItem>
           <MenuItem className={classes.menuItem} value={'favorites'}name='favorites'>My Favorites</MenuItem>
 

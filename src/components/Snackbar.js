@@ -29,7 +29,7 @@ export default function DirectionSnackbar() {
         open={open}
         onClose={handleClose}
         TransitionComponent={transition}
-        message="These scores are calculated using the Google Natural Language Sentiment API. The averages are based on the scores of all user messages sent. "
+        message="These scores are calculated using the Google Natural Language Sentiment API. The averages are based on the scores of all messages sent. "
       />
     </div>
   );

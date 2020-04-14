@@ -8,7 +8,9 @@ class Prompts extends React.Component {
         showSeriousPrompt: false, 
         showPrompt: false,
         prompt: '',
-        seriousPrompt: ''
+        seriousPrompt: '', 
+        swapSerious: false,
+        swapSilly: false 
     }
 
     componentDidMount() {
@@ -27,8 +29,7 @@ class Prompts extends React.Component {
     }
     prompts = [
         "What is something that always puts you in a good mood?",
-        "What is the best way to lift someone else’s spirits?",
-        "Create a morning mantra for yourself that you could use to start each day off right. Write about what it means to you.", 
+        "What is the best way to lift someone else’s spirits?", 
         "Do you believe that setting a good intention for your day can help you have a better day? Why or why not?",
         "Imagine your perfect day and write about what it would look like.",
         "Write about a time when a situation that seemed bad turned out okay in the end.",
@@ -54,12 +55,14 @@ class Prompts extends React.Component {
     ]
 
     handleClick = () => {
+        this.handleSillySwap()
         this.setState({
             showPrompt: true
         })
     }
 
     handleSeriousClick = () => {
+        this.handleSeriousSwap()
         this.setState({
             showSeriousPrompt: true
         })
@@ -68,6 +71,18 @@ class Prompts extends React.Component {
     sample(array) {
         return array[Math.floor ( Math.random() * array.length )]
       }
+
+    handleSillySwap = () => {
+        this.setState({
+            swapSilly: true
+        })
+    }
+
+    handleSeriousSwap = () => {
+        this.setState({
+            swapSerious: true
+        })
+    }
     
     render() {
         const button= {
@@ -76,7 +91,17 @@ class Prompts extends React.Component {
             width: '150px',
             background: 'linear-gradient(45deg, #9358FA 30%, #FC3E24 90%)',
             boxShadow: '2px 2px #59B263',
-            fontSize: '15px'
+            fontSize: '15px',
+            fontStyle: 'italic'
+        }
+        const button2= {
+            fontFamily: 'Noto Sans' + "sans-serif",
+            height: '40px',
+            width: '150px',
+            background: 'linear-gradient(45deg, #FC3E24 30%, #9358FA 90%)',
+            boxShadow: '2px 2px #59B263',
+            fontSize: '15px',
+            fontStyle: 'italic'
         }
         const button1= {
             fontFamily: 'Noto Sans' + "sans-serif",
@@ -84,8 +109,17 @@ class Prompts extends React.Component {
             width: '150px',
             background: 'linear-gradient(45deg, #10B642 30%, #1922E8 90%)',
             boxShadow: '2px 2px #59B263',
-            fontSize: '15px'
-
+            fontSize: '15px',
+            fontWeight: 'bold'
+        }
+        const button3= {
+            fontFamily: 'Noto Sans' + "sans-serif",
+            height: '40px',
+            width: '150px',
+            background: 'linear-gradient(45deg, #1922E8 30%, #10B642 90%)',
+            boxShadow: '2px 2px #59B263',
+            fontSize: '15px',
+            fontWeight: 'bold'
         }
 
         const row= {
@@ -106,7 +140,7 @@ class Prompts extends React.Component {
                                 onClick={this.handleClick}
                                 variant="contained"
                                 color="primary"
-                                style={{...button, fontStyle: 'italic'}}
+                                style={this.state.swapSilly ? button2 : button}
                                         
                             >Silly
                             </Button>
@@ -118,7 +152,7 @@ class Prompts extends React.Component {
                                 onClick={this.handleSeriousClick}
                                 variant="contained"
                                 color="primary"
-                                style={{...button1, fontWeight: 'bold'}}
+                                style={this.state.swapSerious ? button3 : button1}
                                         
                             >Serious
                             </Button>

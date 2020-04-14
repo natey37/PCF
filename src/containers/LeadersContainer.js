@@ -132,7 +132,7 @@ class LeadersContainer extends React.Component {
                      {/* <img style={{width: '40px', height: '40px', marginLeft: '415px'}} src={home_pin}></img> */}
                      {/* </h2> */}
                 </div>
-                <Filter></Filter>
+                {/* <Filter></Filter> */}
                 <br></br>
                    
                     {this.state.leaders.map((leader, index) => <LeaderGrid2 index={index} leader={leader}/>) }

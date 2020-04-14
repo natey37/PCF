@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-
+import title from './styling/title.png'
 
 class Login extends React.Component {
 
@@ -23,30 +23,30 @@ class Login extends React.Component {
         <br></br>
         <br></br>
         <br></br>
+        
+        <img style={{height: '200px', width: '700px'}}src={title}></img>
+        {/* <div>
+            <h2 style={{textAlign: "center", fontSize: '35px', color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>Login</h2>
+        </div> */}
         <br></br>
-        <br></br>
-      
-        <div>
-            <h2 style={{textAlign: "center"}}>Login</h2>
-        </div>
         <div style={{textAlign: "center"}}>
           <form onSubmit={(event) => this.props.handleSubmit(event)}>
-            <label style={{fontSize: "30px"}}>
+            <label style={{fontSize: "30px", color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>
               Username:
               <input onChange={(event) => this.props.handleChange(event)}  type="text" name="username" style={{marginRight: '75px'}} />
             </label>
             <br></br>
             <br></br>
-            <label style={{fontSize: "30px"}}>
+            <label style={{fontSize: "30px", color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>
               Password:
               <input onChange={(event) => this.props.handleChange(event)} type="text" name="password" style={{marginRight: '70px'}}/>
             </label>
             <br></br>
 
-            <button  type="submit" value="Log-In" style={{width: "200px", height: '40px', fontSize: "22px"}}>Log In</button>
+            <button  type="submit" value="Log-In" style={{width: "200px", height: '40px', fontSize: "22px", fontFamily: 'Noto Sans' + "sans-serif"}}>Log In</button>
           </form>
 
-            <Link to="/signup" style={{color: 'white'}}>Dont have an account? Sign up!</Link>
+            <Link to="/signup" style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>Don't have an account? Sign up!</Link>
             
         </div>
 

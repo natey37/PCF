@@ -19,7 +19,8 @@ class BulletinBoard extends React.Component {
       background: false, 
       edit: false,
       message: '',
-      favorite: false 
+      favorite: false,
+      test: false
 
   }
 
@@ -39,9 +40,11 @@ class BulletinBoard extends React.Component {
 
   handleLike = () => {
     if(!this.state.switch)
+    console.log(this.state.likes)
     this.setState({
         likes: this.state.likes + 1
       }, () => {
+        console.log(this.state.likes)
         fetch(`http://localhost:3000/sentcharges/${this.props.message.id}`, {
           method: "PATCH", 
           headers: {
@@ -49,14 +52,20 @@ class BulletinBoard extends React.Component {
           }, 
           body: JSON.stringify({likes: this.state.likes})
       })
-      .then(resp => resp.json()).then(resp => {
-        console.log(resp)
-        this.setState({
-          likes: resp.likes.likes
-        })
-      })
+      // .then(resp => resp.json()).then(resp => {
+      //   console.log(resp)
+      //   this.setState({
+      //     likes: resp.likes.likes
+      //   })
+      // })
     })
     
+  }
+
+  handleTest = () => {
+    this.setState({
+      test: true
+    })
   }
 
   handleSwitch = () => {
@@ -72,19 +81,19 @@ class BulletinBoard extends React.Component {
   }
 
   handleAllClickEvents = () => {
-    console.log(this.props.message.user_id)
-    console.log(localStorage.user_id)
+    // console.log(this.props.message.user_id)
+    // console.log(localStorage.user_id)
     if(this.props.message.user_id !== parseInt(localStorage.user_id)){
       this.handleLike()
       this.handleSwitch()
       this.handleBackgroundChange()
+      this.handleTest()
     }
    
   }
 
   handleEdit = () =>  {
-    console.log('inside'
-    )
+  
     this.setState({
       edit: true 
     })
@@ -123,7 +132,7 @@ class BulletinBoard extends React.Component {
     }
 
     handleFavorite = () => {
-      console.log('hi from favorite')
+      // console.log('hi from favorite')
       fetch('http://localhost:3000/favorites', {
         method: "POST", 
         headers: {
@@ -142,8 +151,8 @@ class BulletinBoard extends React.Component {
     }
  
   render(){
-    console.log(this.props)
-    
+    // console.log(this.props)
+      // console.log(this.state.message)
      const root= {
         flexGrow: 1,
         
@@ -200,7 +209,7 @@ class BulletinBoard extends React.Component {
     fontSize: "15px",
     backgroundColor: '#FFFFFF'
   };
-  console.log(this.props.message.id)
+  // console.log(this.props.message.id)
       return (
         <div style={root}>
           <br></br>
@@ -233,45 +242,58 @@ class BulletinBoard extends React.Component {
                       />
                     :
                       <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
-                        {this.state.message}
+                        {!this.state.edit ? this.props.message.message : this.state.message}
+                        {/* {this.state.message} */}
                       </Typography>
                   }
                     
                     <br></br>
-
-                    {!this.state.background ? 
+                    {this.props.filter === null  || this.props.filter === 'today' ? 
+                      <div>
+                         {!this.state.background ? 
                       <Button style={button} onClick={() => this.handleAllClickEvents()} >
-                        
-                        {this.state.switch ? 
+                         Charge: {this.props.message.likes}
+                          <img src={charge} style={{width: '20px', height: '20px'}}></img> 
+                        {/* {this.state.switch ? 
                         <div>
-                          Charge: {this.state.likes}
+                          Charge: {!this.state.test ? this.props.message.likes : this.state.likes}
                           <img src={charge} style={{width: '20px', height: '20px'}}></img> 
                         </div>
                         :
                         <div>
                           <img src={charge} style={{width: '20px', height: '20px'}}></img> 
-                          Charge: {this.state.likes}
+                          Charge: {!this.state.test ? this.props.message.likes : this.state.likes}
                         </div>
-                      }
-                      {/* charge: {this.state.likes} */}
+                      } */}
+                     
                       </Button>
                     : 
-                      <Button style={button1} onClick={() => this.handleAllClickEvents()} >
-                        
-                      {this.state.switch ? 
-                      <div>
+                      <Button style={button1}  >
+                         <img src={charge} style={{width: '20px', height: '20px'}}></img> 
                         Charge: {this.state.likes}
+                      {/* {this.state.switch ? 
+                      <div>
+                        Charge: {!this.state.test ? this.props.message.likes : this.state.likes}
                         <img src={charge} style={{width: '20px', height: '20px'}}></img> 
                       </div>
                       :
                       <div>
                         <img src={charge} style={{width: '20px', height: '20px'}}></img> 
-                        Charge: {this.state.likes}
+                        Charge: {!this.state.test ? this.props.message.likes : this.state.likes}
                       </div>
-                    }
+                    } */}
                     {/* charge: {this.state.likes} */}
                       </Button>
-                    }
+                  } 
+                      </div>
+                    :
+                    null
+                      // <div>
+                      //     {this.props.message.likes}
+
+                      // </div>
+                  }
+                   
                       
 
 
@@ -290,17 +312,14 @@ class BulletinBoard extends React.Component {
                         :
                         null
                     }
-                     {this.props.message.user_id === parseInt(localStorage.user_id ) ? 
+                     {/* {this.props.message.user_id === parseInt(localStorage.user_id ) ? 
                           
                           <Grid item>
                             {!this.state.edit ? this.editButton() : this.resendButton()}
-                              {/* <Button onClick={this.handleEdit}>
-                                {this.state.edit ? "Resend!" : "Edit"}
-                              </Button> */}
                           </Grid>
                         :
                        null
-                    }
+                    } */}
                      {this.props.message.user_id !== parseInt(localStorage.user_id ) ? 
                           
                           <Grid item>

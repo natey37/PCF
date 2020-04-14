@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom"
+import title from './styling/title.png'
 
 class Signup extends React.Component {
 
@@ -15,7 +16,7 @@ class Signup extends React.Component {
 
     // backgroundColor: '#008080'
     return (
-      <div >
+      <div style={{fontFamily: 'Noto Sans' + "sans-serif", color: 'white'}}>
             {/* {this.props.currentUser && <Redirect to='/recharge'/>} */}
 
     
@@ -25,13 +26,13 @@ class Signup extends React.Component {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        
+        
+        <img style={{height: '200px', width: '700px'}}src={title}></img>
 
         
         <div>
-            <h2 style={{textAlign: "center"}}>Sign Up</h2>        
+            <div style={{textAlign: "center", fontSize: '35px'}}>Sign Up</div>        
         </div>
         <div style={{textAlign: "center"}}>
           <form onSubmit={(event) => this.props.handleSubmit(event)}>
@@ -50,19 +51,19 @@ class Signup extends React.Component {
             <br></br>
             <label style={{fontSize: "30px"}}>
               Username: 
-              <input onChange={(event) => this.props.handleChange(event)}  type="text" name="username" style={{marginRight: '70px'}}/>
+              <input onChange={(event) => this.props.handleChange(event)}  type="text" name="username" style={{marginRight: '120px'}}/>
             </label>
             <br></br>
             <br></br>
             <label style={{fontSize: "30px"}}>
               Password:
-              <input onChange={(event) => this.props.handleChange(event)}  type="text" name="password" style={{marginRight: '65px'}}/>
+              <input onChange={(event) => this.props.handleChange(event)}  type="text" name="password" style={{marginRight: '110px'}}/>
             </label>
             <br></br>
             <br></br>
             <label style={{fontSize: "30px"}}>
               Password Confirmation:
-              <input onChange={(event) => this.props.handleChange(event)} type="text" name="passwordConfirmation" style={{marginRight: '230px'}} />
+              <input onChange={(event) => this.props.handleChange(event)} type="text" name="passwordConfirmation" style={{marginRight: '280px'}} />
             </label>
             <br></br>
            

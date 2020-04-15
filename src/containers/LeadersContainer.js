@@ -98,6 +98,7 @@ class LeadersContainer extends React.Component {
             width: '600px',
             boxShadow: '5px 5px #40907F',
             backgroundColor: "#63E2C6",
+            cursor: 'default'
                 }
         const filter = {
             // textAlign: 'center', 
@@ -108,13 +109,13 @@ class LeadersContainer extends React.Component {
         }
         console.log(this.state.leaders)
         return (
-            <div>
+            <div >
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
-                <Box style={box}>
+                <Box disableRipple={true} style={box}>
                     <h1 style={{color: 'white',fontFamily: 'Noto Sans' + "sans-serif", margin: '0', fontSize: '40px' }}>
                         These are the Protons!
                     </h1>

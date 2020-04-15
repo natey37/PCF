@@ -60,6 +60,7 @@ export default function Tags(props) {
 
 const tagOptions = [
     { tag: 'Achievement'}, 
+    { tag: 'Daily Prompt'}, 
     { tag: 'Family'}, 
     { tag: 'Friendship'}, 
     { tag: 'Inspiration'}, 

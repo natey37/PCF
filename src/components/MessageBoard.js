@@ -277,7 +277,7 @@ class MessageBoard extends React.Component {
                     {this.state.feelings === 'neutral' && this.state.close === false ? 
                     
                     <Alert icon={false} style={alert}  severity="info" onClose={() => this.setClose()}>
-                         <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={neutral1}></img>
+                         <img style={{height: '300px', width: '350px', marginLeft: '150px',cursor: 'default'}} src={neutral1}></img>
                         <AlertTitle style={{marginLeft: '70px'}}>You are a neutral Neutron!</AlertTitle>
                         <div style={{marginLeft: '70px'}}>
                          Your message had a score of {Math.round(this.state.score * 100) / 100}. You're almost there! Keep up the good attitude!
@@ -288,7 +288,7 @@ class MessageBoard extends React.Component {
                     {this.state.feelings === 'positive' && this.state.close === false ? 
                     
                         <Alert  icon={false} style={alert}  severity="success" onClose={() => this.setClose()}>
-                            <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={positive1}></img>
+                            <img style={{height: '300px', width: '350px', marginLeft: '150px',cursor: 'default'}} src={positive1}></img>
                             <br></br>
                             <AlertTitle style={{marginLeft: '70px'}}>You are a positive Proton!</AlertTitle>
                             <div style={{marginLeft: '70px'}}>
@@ -300,7 +300,7 @@ class MessageBoard extends React.Component {
                     {this.state.feelings === 'negative' && this.state.close === false ? 
                     
                         <Alert icon={false} style={alert}  severity="error" onClose={() => this.setClose()}>
-                             <img style={{height: '300px', width: '350px', marginLeft: '150px'}} src={negative1}></img>
+                             <img style={{height: '300px', width: '350px', marginLeft: '150px',cursor: 'default'}} src={negative1}></img>
                             <AlertTitle>You are a negative Electron!</AlertTitle>
                             Your message had a score of {Math.round(this.state.score * 100) / 100}. Your message will not be sent! Please write something more positive!
                         </Alert> :
@@ -309,8 +309,8 @@ class MessageBoard extends React.Component {
             
               
                 <Paper style={paper} elevation={20}>
-                    <h1 style={{paddingTop: '10px', fontSize: '30px',             fontFamily: 'Noto Sans' + "sans-serif", marginBottom: '0px'}}>Write something positive to share with a stranger!</h1>
-                    <h4 style={{fontFamily: 'Noto Sans' + "sans-serif"}}>Tell a personal story, share an idea, tell a funny joke!</h4>
+                    <h1 style={{paddingTop: '10px', fontSize: '30px',             fontFamily: 'Noto Sans' + "sans-serif", marginBottom: '0px',     cursor: 'default'}}>Write something positive to share with a stranger!</h1>
+                    <h4 style={{fontFamily: 'Noto Sans' + "sans-serif",             cursor: 'default'}}>Tell a personal story, share an idea, tell a funny joke!</h4>
 
                     <Paper style={message}>
                         <textarea

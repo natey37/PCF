@@ -14,11 +14,11 @@ import down1 from '../styling/down1.png'
 const columns = [
   { id: 'duration', label: 'Duration:', minWidth: 140 },
   { id: 'feelings', label: 'Feelings Score:', minWidth: 100 },
-  { id: 'status', label: 'Status:', minWidth: 10}
+  { id: 'trend', label: 'Trend:', minWidth: 10}
 ];
 
-function createData(duration, feelings, status) {
-    return {duration, feelings, status}
+function createData(duration, feelings, trend) {
+    return {duration, feelings, trend}
 }
 
 // const rows = [
@@ -56,17 +56,17 @@ export default function StickyHeadTable(props) {
   const rows = [
     createData('Today', 
         Math.round(props.time.daily * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={props.time.daily >= props.time.yesterday ? up1 : down1}></img>
+        <img style={{height: '50px', width: '50px',cursor: 'default'}}src={props.time.daily >= props.time.yesterday ? up1 : down1}></img>
         ),
     createData('Yesterday',
         Math.round(props.time.yesterday * 100) / 100,  
-        <img style={{height: '50px', width: '50px'}}src={props.time.yesterday >= props.time.weekly ? up1 : down1}></img>),
+        <img style={{height: '50px', width: '50px',cursor: 'default'}}src={props.time.yesterday >= props.time.weekly ? up1 : down1}></img>),
     createData('This Week', 
         Math.round(props.time.weekly * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={props.time.weekly >= props.time.allTime ? up1 : down1}></img>),
+        <img style={{height: '50px', width: '50px',cursor: 'default'}}src={props.time.weekly >= props.time.allTime ? up1 : down1}></img>),
     createData('All Time', 
         Math.round(props.time.allTime * 100) / 100, 
-        <img style={{height: '50px', width: '50px'}}src={props.time.allTime > props.time.allTimeYesterday ? up1 : down1}></img>
+        <img style={{height: '50px', width: '50px',cursor: 'default'}}src={props.time.allTime > props.time.allTimeYesterday ? up1 : down1}></img>
         )
 
 
@@ -106,8 +106,7 @@ export default function StickyHeadTable(props) {
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell light={true} key={column.id} align={column.align} style={{backgroundColor: '#6699CC', color: 'white', fontSize: '25px', textAlign: 'center',fontFamily: 'Noto Sans' + "sans-serif"
-                    }}>
+                      <TableCell light={true} key={column.id} align={column.align} style={{backgroundColor: '#6699CC', color: 'white', fontSize: '25px', textAlign: 'center',fontFamily: 'Noto Sans' + "sans-serif",cursor: 'default'}}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );

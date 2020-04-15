@@ -202,6 +202,8 @@ class FeelingsContainer extends React.Component {
             width: '600px',
             boxShadow: '5px 5px #40907F',
             backgroundColor: "#63E2C6",
+            cursor: 'default'
+
                 }
         return (
             <div>
@@ -212,7 +214,7 @@ class FeelingsContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <Box  style={box}>
+                <Box  disableRipple={true} style={box}>
                     <h1 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif", margin: '0', fontSize: '40px'
                     }}>
                         How are we feeling?

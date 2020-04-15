@@ -24,7 +24,8 @@ class TagSelector extends React.Component {
     
       }
       const selector= {
-          backgroundColor: '#FFED87'
+          backgroundColor: '#FFED87', 
+          
       }
     return (
         <div style={root}>
@@ -55,6 +56,7 @@ class TagSelector extends React.Component {
 
 const tagOptions = [
     { tag: 'Achievement'}, 
+    { tag: 'Daily Prompt'}, 
     { tag: 'Family'}, 
     { tag: 'Friendship'}, 
     { tag: 'Inspiration'}, 

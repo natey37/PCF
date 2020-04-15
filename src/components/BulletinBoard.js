@@ -11,6 +11,8 @@ import charge from '../styling/charge.png';
 import positive1 from '../styling/positive1.png'
 import neutral1 from '../styling/neutral1.png'
 import thunder from '../styling/thunder.png'
+import Tooltip from '@material-ui/core/Tooltip';
+
 class BulletinBoard extends React.Component {
 
   state = {
@@ -40,7 +42,7 @@ class BulletinBoard extends React.Component {
   }
 
   handleLike = () => {
-    if(!this.state.switch)
+    // if(!this.state.switch)
     // console.log(this.state.likes)
     this.setState({
         likes: this.state.likes + 1
@@ -177,6 +179,8 @@ class BulletinBoard extends React.Component {
     const image= {
         width: 150,
         height: 150,
+        cursor: 'default'
+
       }
     const  img= {
         margin: 'auto',
@@ -236,9 +240,13 @@ class BulletinBoard extends React.Component {
               <Grid item>
                 <ButtonBase style={image}>
                   {this.props.message.sentiment_score > 0.3 ? 
-                      <img style={img} alt="positive" src={positive1} />
-                  :
-                      <img style={img} alt="complex" src={neutral1} />
+                      <Tooltip title='This is a message with a positive score'>
+                        <img style={img} alt="positive" src={positive1} />
+                      </Tooltip>
+                  :   
+                      <Tooltip title='This is a message with a neutral score'>
+                        <img style={img} alt="complex" src={neutral1} />
+                      </Tooltip>
                 }
                 </ButtonBase>
                 {this.props.message.user_id !== parseInt(localStorage.user_id ) ? 
@@ -274,7 +282,7 @@ class BulletinBoard extends React.Component {
               <Grid item xs={12} sm container style={{marginRight: "140px"}}>
                 <Grid item xs container direction="column" spacing={2}>
                   <Grid item xs>
-                    <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px'}}>
+                    <Typography gutterBottom variant="subtitle1" style={{     fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px',      cursor: 'default'}}>
                       {this.props.message.username}
                     </Typography>
                     {this.state.edit ? 
@@ -287,7 +295,7 @@ class BulletinBoard extends React.Component {
                         value={this.state.message}
                       />
                     :
-                      <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>
+                      <Typography variant="body2" gutterBottom style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px',             cursor: 'default'}}>
                         {!this.state.edit ? this.props.message.message : this.state.message}
                         {/* {this.state.message} */}
                       </Typography>
@@ -295,6 +303,14 @@ class BulletinBoard extends React.Component {
                     
                     <br></br>
                     {this.props.filter === 'alltime' && 
+                      <div style={row}>
+                        <div style={column}>
+                          {this.props.message.likes}
+                          <img style={{height: '40px', width: '40px'}}src={thunder}></img>
+                        </div>
+                      </div>
+                    }
+                     {this.props.filter === 'favorites' && 
                       <div style={row}>
                         <div style={column}>
                           {this.props.message.likes}
@@ -368,7 +384,7 @@ class BulletinBoard extends React.Component {
                     } */}
                   
                     
-                    <Typography variant="body2" color="textSecondary" style={{     fontFamily: 'Noto Sans' + "sans-serif", marginLeft: '360px'}}>
+                    <Typography variant="body2" color="textSecondary" style={{     fontFamily: 'Noto Sans' + "sans-serif", marginLeft: '360px',     cursor: 'default'}}>
                         <Moment format="D MMM YYYY HH:mm:ss">
                             {this.props.message.created_at}
 

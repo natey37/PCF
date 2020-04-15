@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
   image: {
     width: 150,
     height: 150,
+    cursor: 'default'
+
   },
   img: {
     margin: '0',
@@ -53,7 +55,8 @@ export default function LeaderGrid2(props) {
              
              <Grid xs={6}>
                 <br></br>
-            <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '40px', fontStyle: 'italic', marginTop: '10px'}}>
+            <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '35px', fontStyle: 'italic', marginTop: '10px',cursor: 'default'
+}}>
 
                 #{props.index + 1} {props.leader[2]}
             {/* <div className={classes.row}>
@@ -76,7 +79,12 @@ export default function LeaderGrid2(props) {
                  <br></br>
                  <br></br>
                 
-                 <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold'}}>Charges:      <div style={{fontSize: '30px'}}>{props.leader[1]}</div> </Typography>
+                 <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold', cursor: 'default'}}>
+                    Charges:      
+                      <div style={{fontSize: '30px'}}>
+                        {props.leader[1]}
+                      </div> 
+                 </Typography>
              </Grid>
              <Grid xs={3}>
                  <br></br>
@@ -84,7 +92,12 @@ export default function LeaderGrid2(props) {
                  <br></br>
                  <br></br>
                 
-                <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold'}}>Feelings Score: <div style={{fontSize: '30px'}}>{Math.round(props.leader[0] * 100) / 100}</div></Typography>
+                <Typography style={{fontFamily: 'Noto Sans' + "sans-serif", fontSize: '20px', fontWeight: 'bold',cursor: 'default'}}>
+                    Feelings Score: 
+                      <div style={{fontSize: '30px'}}>
+                        {Math.round(props.leader[0] * 100) / 100}
+                      </div>
+                  </Typography>
              </Grid>
           </Grid>
         </Grid>

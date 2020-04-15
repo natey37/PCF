@@ -25,11 +25,11 @@ export default function DirectionSnackbar() {
     <div>
       <Button style={{color: "white"}} onClick={handleClick(TransitionUp)}>Curious? See more info!</Button>
       <Snackbar
-        style={{color: "white"}}
+        style={{color: "white", cursor: 'default'}}
         open={open}
         onClose={handleClose}
         TransitionComponent={transition}
-        message="These scores are calculated using the Google Natural Language Sentiment API. The averages are based on the scores of all messages sent. "
+        message="These scores are calculated using the Google Natural Language API. The averages are based on the Sentiment analysis scores of all messages sent during the different time periods. "
       />
     </div>
   );

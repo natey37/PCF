@@ -225,20 +225,24 @@ class RechargeBoard extends React.Component {
 
               position: 'relative',
             
-              color: 'white'
+              color: 'white', 
+              cursor: 'default'
+
           }
           const style = {
             fontFamily: 'Noto Sans' + "sans-serif",
-
+            fontWeight: 'bold',
             textAlign: 'center',
             width: 500, 
             maxHeight: "200px",
-            minHeight: "120px",
+            minHeight: "150px",
             resize: "none",
             padding: "9px",
             boxSizing: "border-box",
             fontSize: "15px",
-            backgroundColor: '#FFFFFF'
+            backgroundColor: '#FFFFFF', 
+            cursor: 'default'
+
           };
           const   button1= {
             fontFamily: 'Noto Sans' + "sans-serif",
@@ -253,7 +257,7 @@ class RechargeBoard extends React.Component {
             <div>
                 <Paper style={paper}>
                     
-                        <h1 style={{fontSize: '30px', paddingTop: '30px',              fontFamily: 'Noto Sans' + "sans-serif"}}>Need to Recharge? </h1>
+                        <h1 style={{fontSize: '30px', paddingTop: '30px',              fontFamily: 'Noto Sans' + "sans-serif",cursor: 'default'}}>Need to Recharge? </h1>
                         <Tooltip title='Choose from the tags below to receive a message that is meant just for you!'>
                             <Button
                                 onClick={this.handleClick}
@@ -267,6 +271,7 @@ class RechargeBoard extends React.Component {
                         <br></br>
                         <br></br>
                         <textarea
+                            disabled='true'
                             spellcheck="false"
                             style={style}
                             ref={c => (this.textarea = c)}

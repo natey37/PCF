@@ -151,7 +151,7 @@ export default function MiniDrawer(props) {
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
                   
-                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px', fontFamily: 'Noto Sans' + "sans-serif"}} variant="h6" noWrap>
+                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px', fontFamily: 'Noto Sans' + "sans-serif",cursor: 'default'}} variant="h6" noWrap>
                     Welcome {props.currentUser.username}  
                     
                 </Typography>

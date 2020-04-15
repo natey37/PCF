@@ -49,7 +49,9 @@ class ChargeContainer extends React.Component {
             fontFamily: 'Noto Sans' + "sans-serif",
             position: 'absolute',
             left: '250px',
-            color: 'white'
+            color: 'white',
+            cursor: 'default'
+
         }
       
         return (

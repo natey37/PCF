@@ -54,7 +54,7 @@ class Login extends React.Component {
             <br></br>
             <label style={{fontSize: "30px", color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>
               Password:
-              <input onChange={(event) => this.props.handleChange(event)} type="text" name="password" style={{marginRight: '5px'}}/>
+              <input onChange={(event) => this.props.handleChange(event)} type="password" name="password" style={{marginRight: '5px'}}/>
             </label>
             <br></br>
 

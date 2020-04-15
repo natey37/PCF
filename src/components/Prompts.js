@@ -132,7 +132,7 @@ class Prompts extends React.Component {
         return(
 
             <div>
-                <h1 style={{fontFamily: 'Noto Sans' + "sans-serif"}}>Click for Daily Prompt! </h1>
+                <h1 style={{fontFamily: 'Noto Sans' + "sans-serif",             cursor: 'default'}}>Click for Daily Prompt! </h1>
                 <div style={row}>
                     <div style={column}>
                         <Tooltip title="This will create a randomly generated silly writing prompt for you!">
@@ -160,8 +160,8 @@ class Prompts extends React.Component {
                     </div>
                 </div>
             
-        {this.state.showPrompt  ? <h4 style={{marginRight: '20px', marginLeft: '20px', fontStyle: 'italic', fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>{this.state.prompt}</h4>: null}
-        {this.state.showSeriousPrompt ? <h4 style={{marginRight: '20px', marginLeft: '20px', fontWeight: 'bold', fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px'}}>{this.state.seriousPrompt}</h4>: null}
+        {this.state.showPrompt  ? <h4 style={{marginRight: '20px', marginLeft: '20px', fontStyle: 'italic', fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px', cursor: 'default'}}>{this.state.prompt}</h4>: null}
+        {this.state.showSeriousPrompt ? <h4 style={{marginRight: '20px', marginLeft: '20px', fontWeight: 'bold', fontFamily: 'Noto Sans' + "sans-serif", fontSize: '17px', cursor: 'default'}}>{this.state.seriousPrompt}</h4>: null}
 
         {/* <div className={classes.row} >
             <div className={classes.column}>

@@ -7,7 +7,6 @@ class FeelingsContainer extends React.Component {
     state = {
         daily: '', 
         weekly: '', 
-        monthly: '',
         allTime: '',
         yesterday: '',
         allTimeYesterday: ''
@@ -17,97 +16,57 @@ class FeelingsContainer extends React.Component {
         fetch('http://localhost:3000/sentcharges')
         .then(resp => resp.json())
         .then(resp => {
-            console.log(resp)
-            //get todays date
+        //get todays date
             let thisDate = new Date()
+        //get the number of the month
             let thisDateDay = thisDate.getDate()
-            //finding all time scores yesterday 
+        //convert created_at on sentcharge to a number of the month
             let newResps = resp.map(sentcharge => 
                 { return {...sentcharge, created_at: this.convertToDay(sentcharge.created_at)}}
             )
+        //finding all time scores yesterday 
             let filteredYesterdayAllTimeResps = newResps.filter(sentcharge => sentcharge.created_at !== thisDateDay)
-            let scoresMapped = filteredYesterdayAllTimeResps.map(resp => resp.sentiment_score)
-
-            let filteredYesterdayAllTime = scoresMapped.filter(function (el) {
-                return el != null;
-              });
-            const add10 = (a, b) => a + b 
-            console.log(filteredYesterdayAllTime)
-            const sum10 = filteredYesterdayAllTime.reduce(add10) / filteredYesterdayAllTime.length
-            console.log(sum10)
+            let scoresMapped = this.mapScores(filteredYesterdayAllTimeResps)
+            let filteredYesterdayAllTime = this.filterNulls(scoresMapped)
             this.setState({
-                allTimeYesterday: sum10
+                allTimeYesterday: this.sum(filteredYesterdayAllTime)
             })
-            console.log(this.state.allTimeYesterday)
-            //finding all time scores
-            let scores = resp.map(resp => resp.sentiment_score)
-            let filtered = scores.filter(function (el) {
-                return el != null;
-              });
-              const add = (a, b) =>
-                a + b
-              // use reduce to sum our array
-              console.log(filtered)
-              const sum = filtered.reduce(add) / filtered.length
-              this.setState({
-                  allTime: sum 
-              })
+
+        //finding all time scores
+            let scoresAllTime = this.mapScores(resp)
+            let filteredAllTime = this.filterNulls(scoresAllTime)
+            this.setState({
+                allTime: this.sum(filteredAllTime)
+            })
               
-              //finding daily score 
-
-              //map created_at to number of month 
-            // let newResps = resp.map(sentcharge => 
-            //     { return {...sentcharge, created_at: this.convertToDay(sentcharge.created_at)}}
-            // )
-             
-           
-                //filter sentcharges that match todays number of month
-            let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay)
-            //summing scores
-            let todayScores = filteredResps.map(sentcharge => sentcharge.sentiment_score)
-            //filter any nulls
-            console.log(todayScores)
+        //finding todays score
+            let filteredResps = this.filterWeekly(newResps, thisDateDay)
+            let todayScores = this.mapScores(filteredResps)
             if(todayScores.length > 0){
-                
-                let todayFiltered = todayScores.filter(function (el) {
-                    return el != null;
-                  });
-                  const add1 = (a, b) =>
-                    a + b
-                  // use reduce to sum our array
-                  const sum1 = todayFiltered.reduce(add1) / todayFiltered.length
-                  this.setState({
-                      daily: sum1
-                  })
-
-            }
+                let todayFiltered = this.filterNulls(todayScores)
+                this.setState({
+                    daily: this.sum(todayFiltered)
+                })
+            } 
            
         //finding yesterdays score 
-        let yesterday = thisDate.setDate(thisDate.getDate() - 1);
-        let test = new Date(yesterday)
-        let realYesterday = test.getDate()
-        console.log(yesterday)
-        console.log(test)
-        console.log(realYesterday)
-        let filteredYesterdayResps = newResps.filter(sentcharge => sentcharge.created_at === realYesterday)
-        console.log(filteredYesterdayResps)
-        //summing scores
-        let yesterdayScores = filteredYesterdayResps.map(sentcharge => sentcharge.sentiment_score)
-        console.log(yesterdayScores)
-        //filter any nulls
-        let yesterdayFiltered = yesterdayScores.filter(function (el) {
-            return el != null;
-          });
-          console.log(yesterdayFiltered)
-          const add7 = (a, b) =>
-            a + b
-          // use reduce to sum our array
-          const sum7 = yesterdayFiltered.reduce(add7) /yesterdayFiltered.length
-          this.setState({
-              yesterday: sum7
-          })
+            let yesterday = thisDate.setDate(thisDate.getDate() - 1);
+            //yesterdays date
+            let test = new Date(yesterday)
+            //yesterdays date of month
+            let realYesterday = test.getDate()
+        
+            let filteredYesterdayResps = this.filterWeekly(newResps, realYesterday)
+            let yesterdayScores = this.mapScores(filteredYesterdayResps)
+            if(yesterdayScores.length > 0){
+                let yesterdayFiltered = this.filterNulls(yesterdayScores)
+                this.setState({
+                    yesterday: this.sum(yesterdayFiltered)
+                })
+            }
+           
 
-              //filter weekly
+            //corrects for monthly wrap around for a 30 day month
               let day = thisDateDay 
               if(this.day - 7 === 0){
                   day = 1
@@ -127,74 +86,54 @@ class FeelingsContainer extends React.Component {
                   day = (day - 7) + 1
               }
               
-                 //filter sentcharges that match todays number of month
-                let filteredWeeklyResps = newResps.filter(sentcharge => sentcharge.created_at <= thisDateDay && sentcharge.created_at >= day)
-                //summing scores
-                let weeklyScores = filteredWeeklyResps.map(sentcharge => sentcharge.sentiment_score)
-                //filter any nulls
-                let weeklyFiltered = weeklyScores.filter(function (el) {
-                    return el != null;
-                });
-                const add2 = (a, b) =>
-                    a + b
-                // use reduce to sum our array
-                const sum2 = weeklyFiltered.reduce(add2) / weeklyFiltered.length
+        //weekly scores
+            let filteredWeeklyResps = this.filterWeekly(newResps, thisDateDay, day)
+            let weeklyScores = this.mapScores(filteredWeeklyResps)
+            if(weeklyScores.length > 0){
+                let weeklyFiltered = this.filterNulls(weeklyScores)
                 this.setState({
-                    weekly: sum2
+                     weekly: this.sum(weeklyFiltered)
                 })
+            }
+        })  
+    }
 
+    filterWeekly = (array, thisDateDay, day=null) => {
+        if(day === null){
+            return array.filter(sentcharge => sentcharge.created_at === thisDateDay)
+        } else {
+            return array.filter(sentcharge => sentcharge.created_at <= thisDateDay && sentcharge.created_at >= day)
+        }      
+    }
 
-                //filter monthly
+    mapScores = (array) => {
+       return array.map(sentcharge => sentcharge.sentiment_score)
+    }
+    
+    filterNulls = (array) => {
+        return array.filter(function (el) {
+            return el != null;
+          });
+    }
 
-                //map 
-                let newMonthlyResps = resp.map(sentcharge => 
-                    { return {...sentcharge, created_at: this.convertToMonth(sentcharge.created_at)}}
-                )
-                  
-                  let thisDateMonth = thisDate.getMonth()
+    add = (a,b) => a + b
 
-                    //filter sentcharges that match month
-                    let filteredMonthlyResps = newMonthlyResps.filter(sentcharge => sentcharge.created_at === thisDateMonth)
-                    //summing scores
-                    let monthlyScores = filteredMonthlyResps.map(sentcharge => sentcharge.sentiment_score)
-                    //filter any nulls
-                    let monthlyFiltered = monthlyScores.filter(function (el) {
-                        return el != null;
-                    });
-                    const add3 = (a, b) =>
-                        a + b
-                    // use reduce to sum our array
-                    const sum3 = monthlyFiltered.reduce(add3) / monthlyFiltered.length
-                    this.setState({
-                        monthly: sum3
-                    })
-                 console.log(thisDate)
-            //    console.log(thisDateMonth)
-            //    console.log(newMonthlyResps)
-            //     console.log(this.state.monthly)
-            //   var oneWeekAgo = new Date();
-            //   console.log(oneWeekAgo)
-            //    let x = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            //    console.log(x)
-            //    let y = new Date(x)
-            //    console.log(y)
-        })
-
-        
+    sum = (array) => {
+        return array.reduce(this.add) / array.length
     }
 
     convertToDay = (stringDate) => {
-                let parsedDate = Date.parse(stringDate)
-                let newDate = new Date(parsedDate)
-                let number_of_month = newDate.getDate()
-                return number_of_month
+        let parsedDate = Date.parse(stringDate)
+        let newDate = new Date(parsedDate)
+        let number_of_month = newDate.getDate()
+        return number_of_month
     }
 
     convertToMonth = (stringDate) => {
-                let parsedDate = Date.parse(stringDate)
-                let newDate = new Date(parsedDate)
-                let number_month = newDate.getMonth()
-                return number_month
+        let parsedDate = Date.parse(stringDate)
+        let newDate = new Date(parsedDate)
+        let number_month = newDate.getMonth()
+        return number_month
     }
 
     render(){
@@ -203,51 +142,46 @@ class FeelingsContainer extends React.Component {
             boxShadow: '5px 5px #40907F',
             backgroundColor: "#63E2C6",
             cursor: 'default'
-
-                }
+            }
         return (
             <div>
-            
-            
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 <Box  disableRipple={true} style={box}>
                     <h1 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif", margin: '0', fontSize: '40px'
                     }}>
                         How are we feeling?
-                     </h1>
-
+                    </h1>
                 </Box>
-                <br></br>
-                <br></br>
-                <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 <FeelingsTable time={this.state} />  
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                  <Snackbar />
             </div>
         )

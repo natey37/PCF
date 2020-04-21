@@ -8,7 +8,7 @@ import Leaders from './Leaders.js'
 import Feelings from './Feelings.js'
 import Login from './Login.js'
 import Signup from './Signup.js'
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 class App extends React.Component {
 
@@ -28,6 +28,7 @@ class App extends React.Component {
 }
 
 componentDidMount(){
+
   const user_id = localStorage.user_id
 
   if(user_id){
@@ -46,9 +47,7 @@ componentDidMount(){
         })
       }
     })
-  } else {
-
-  }
+  } 
 }
 
 setUser = (user) => {
@@ -68,7 +67,6 @@ logout = () => {
     localStorage.removeItem("user_id")
     localStorage.removeItem("username")
     localStorage.removeItem("id")
-
 
     this.props.history.push('/login')
   })
@@ -97,7 +95,6 @@ handleUserSubmit = (event) => {
         alert(response.errors)
       } else {
         this.setUser(response.user)
-        
       }
     })
   
@@ -126,7 +123,6 @@ handleNewUserSubmit = (event) => {
           alert(response.errors)
         } else {
           this.setUser(response.user)
-          
         }
       })
     } else {
@@ -139,7 +135,6 @@ handleNewUserSubmit = (event) => {
     return (
       <div className="App" style={{backgroundColor: '#2A4494'}}>
         
-          
             <Nav currentUser={this.state.currentUser} logout={this.logout}/>
             <Switch>
                 <Route exact path="/login" 

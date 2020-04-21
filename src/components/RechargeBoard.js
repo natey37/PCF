@@ -5,7 +5,7 @@ import charge from '../styling/charge.png'
 import TagSelector2 from '../components/TagSelector2.js'
 import { Link } from 'react-router-dom'
 import Tooltip from '@material-ui/core/Tooltip';
-
+import thunder from '../styling/thunder.png'
 class RechargeBoard extends React.Component {
 
     state = {
@@ -339,7 +339,10 @@ class RechargeBoard extends React.Component {
                         </div>
                             <br></br>
                             <br></br>
-                            <Link to='/charge' style={{color: 'white', fontSize: '15px', fontFamily: 'Noto Sans' + "sans-serif"}}>Send a charge!</Link>
+                            <Link to='/charge' style={{color: 'white', fontSize: '15px', fontFamily: 'Noto Sans' + "sans-serif"}}>Send a charge!
+                            <img style={{height: '20px', width: '20px'}} src={thunder}></img>
+                            </Link>
+                            
                             <br></br>
                        
                    

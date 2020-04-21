@@ -24,14 +24,9 @@ import recharge from './styling/recharge.png'
 import sentiment from './styling/sentiment.png'
 import login from './styling/login.png'
 import { Link } from "react-router-dom";
-import title from './styling/title.png'
 import titlewhite from './styling/titlewhite.png'
 import thunder from './styling/thunder.png'
 import Tooltip from '@material-ui/core/Tooltip';
-
-
-
-
 
 const drawerWidth = 240;
 
@@ -97,11 +92,11 @@ const useStyles = makeStyles((theme) => ({
   },
   row: {
     display: 'flex'
-},
- column: {
+  },
+  column: {
     flex: '30%', 
     padding: '0px'
-}
+  }
 }));
 
 export default function MiniDrawer(props) {
@@ -116,7 +111,6 @@ export default function MiniDrawer(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-//   console.log(props.currentUser.username)
 
   return (
     <div className={classes.root}>
@@ -144,18 +138,13 @@ export default function MiniDrawer(props) {
           <div className={classes.row} >
             <div className={classes.column}>
                 <img style={{height: '50px'}}src={titlewhite}></img>
-                {/* <Typography  style={{color: '#FFED87'}} variant="h6" noWrap>
-                    Positively Charged       
-                </Typography> */}
             </div>
             {props.currentUser === null ? null : 
                 <div className={classes.column}>
-                  
-                <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px', fontFamily: 'Noto Sans' + "sans-serif",cursor: 'default'}} variant="h6" noWrap>
-                    Welcome {props.currentUser.username}  
-                    
-                </Typography>
-            </div>
+                  <Typography  style={{color: '#FFED87', marginLeft: '800px', marginTop: '20px', fontFamily: 'Noto Sans' + "sans-serif",cursor: 'default'}} variant="h6" noWrap>
+                      Welcome {props.currentUser.username}  
+                  </Typography>
+                </div>
             } 
             {props.currentUser === null ? null :
                 <div>
@@ -165,23 +154,6 @@ export default function MiniDrawer(props) {
             
             
           </div>
-          {/* <div style={row}>
-                   <div style={column}>
-                        <img style={{width: '40px', height: '40px', marginRight: '280px'}} src={pin_flipped} alt="Snow" />
-                    </div>
-                    <div style={column}>
-                        <HomeFilter></HomeFilter>
-                    </div>
-                    <div style={column}>
-                        <img style={{width: '40px', height: '40px', marginLeft: '280px' }} src={home_pin} alt="Mountains"/>
-                    </div>
-                </div> */}
-
-
-          {/* <Typography  style={{color: '#FFED87', position: "absolute", paddingLeft: "1500px"}} variant="h6" noWrap>
-            FAQ
-          </Typography> */}
-        
         </Toolbar>
       </AppBar>
       <Drawer
@@ -210,7 +182,6 @@ export default function MiniDrawer(props) {
               <Link to="/home">
                 <Tooltip title='Bulletin Board'><img style={{width: '40px', height: '40px'}}src={home_pin}></img></Tooltip>
                 </Link>
-                {/* {fix sizing and font} */}
                 <Link to="/home"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
             </ListItem>
@@ -224,7 +195,6 @@ export default function MiniDrawer(props) {
               <Link to="/charge">
                 <Tooltip title="Send a Charge"><img style={{width: '40px', height: '40px'}}src={charge}></img></Tooltip>
                 </Link>
-                {/* {fix sizing} */}
                 <Link to="/charge"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
             </ListItem>
@@ -238,7 +208,6 @@ export default function MiniDrawer(props) {
               <Link to="/recharge">
                 <Tooltip title='Recharge'><img style={{width: '40px', height: '40px'}}src={recharge}></img></Tooltip>
                 </Link>
-                {/* {fix sizing and font} */}
                 <Link to="/recharge"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
               </ListItemIcon>
             </ListItem>
@@ -256,7 +225,6 @@ export default function MiniDrawer(props) {
                 <Link to="/feelings">
                   <Tooltip title='Feelings!'><img style={{width: '40px', height: '40px'}}src={sentiment}></img></Tooltip>
                   </Link>
-                    {/* {fix sizing and font} */}
                     <Link to="/feelings"><ListItemText style={{paddingLeft: "40px", fontWeight: "bold"}}primary={text} /></Link>
                 </ListItemIcon>
                 </ListItem>
@@ -270,7 +238,6 @@ export default function MiniDrawer(props) {
                 <Link to="/leaders">
                   <Tooltip title='Leaders'><img style={{width: '40px', height: '40px'}}src={leaders}></img></Tooltip>
                   </Link>
-                    {/* {fix sizing and font} */}
                     <Link to="/leaders"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
                 </ListItemIcon>
                 </ListItem>
@@ -293,22 +260,19 @@ export default function MiniDrawer(props) {
                     </ListItem>
                 ))
             : 
-            ['Log Out'].map((text, index) => (
-                <ListItem  button key={text}>
-                <ListItemIcon>
-                  <Tooltip title='Log Out'>
-                    <img onClick={props.logout} style={{width: '40px', height: '40px'}}src={logout}></img>
-                  </Tooltip>
-                    {/* {fix sizing and font} */}
-                    <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
-                </ListItemIcon>
-                </ListItem>
-            ))
+                ['Log Out'].map((text, index) => (
+                    <ListItem  button key={text}>
+                    <ListItemIcon>
+                      <Tooltip title='Log Out'>
+                        <img onClick={props.logout} style={{width: '40px', height: '40px'}}src={logout}></img>
+                      </Tooltip>
+                        {/* {fix sizing and font} */}
+                        <Link to="/login"><ListItemText style={{paddingLeft: "40px"}}primary={text} /></Link>
+                    </ListItemIcon>
+                    </ListItem>
+                ))
         
-        }
-
-
-          
+            }
         </List>
       </Drawer>
     </div>

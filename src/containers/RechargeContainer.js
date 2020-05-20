@@ -11,8 +11,7 @@ class RechargeContainer extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-            <RechargeBoard/>                
-              
+                <RechargeBoard/>                
             </div>
         )
     }

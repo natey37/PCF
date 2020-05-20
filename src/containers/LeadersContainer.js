@@ -1,12 +1,7 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
 import LeaderGrid2 from '../components/LeaderGrid2.js'
-import Filter from '../components/LeaderFilter.js'
 import Box from '@material-ui/core/Button';
-import home_pin from '../styling/home_pin.png'
-import pin_flipped from '../styling/pin_flipped.png'
-import Grid from '@material-ui/core/Grid';
-
 
 class LeadersContainer extends React.Component {
 
@@ -19,31 +14,45 @@ class LeadersContainer extends React.Component {
         fetch('http://localhost:3000/sentcharges')
         .then(resp => resp.json())
         .then(resp => {
-            console.log(resp)
             let userLikeHash = {}
+            let userFeelingsHash = {}
+            let userTotalSentChargeHash = {}
+
             resp.map(sentcharge => {
                 if(userLikeHash[sentcharge.username]){
                     userLikeHash[sentcharge.username] += sentcharge.likes
                 } else {
                     userLikeHash[sentcharge.username] = sentcharge.likes
                 }
-            })
-            let userFeelingsHash = {}
-            resp.map(sentcharge => {
+
                 if(userFeelingsHash[sentcharge.username]){
                     userFeelingsHash[sentcharge.username] += (sentcharge.sentiment_score)
-                } else if(!userFeelingsHash[sentcharge.username]) {
+                } else {
                     userFeelingsHash[sentcharge.username] = (sentcharge.sentiment_score)
                 } 
-            })
-            let userTotalSentChargeHash = {}
-            resp.map(sentcharge => {
+
                 if(userTotalSentChargeHash[sentcharge.username]){
                     userTotalSentChargeHash[sentcharge.username] += 1
                 } else if(!userTotalSentChargeHash[sentcharge.username]) {
                     userTotalSentChargeHash[sentcharge.username] = 1
                 } 
             })
+            // let userFeelingsHash = {}
+            // resp.map(sentcharge => {
+            //     if(userFeelingsHash[sentcharge.username]){
+            //         userFeelingsHash[sentcharge.username] += (sentcharge.sentiment_score)
+            //     } else if(!userFeelingsHash[sentcharge.username]) {
+            //         userFeelingsHash[sentcharge.username] = (sentcharge.sentiment_score)
+            //     } 
+            // })
+            // let userTotalSentChargeHash = {}
+            // resp.map(sentcharge => {
+            //     if(userTotalSentChargeHash[sentcharge.username]){
+            //         userTotalSentChargeHash[sentcharge.username] += 1
+            //     } else if(!userTotalSentChargeHash[sentcharge.username]) {
+            //         userTotalSentChargeHash[sentcharge.username] = 1
+            //     } 
+            // })
             
             console.log(userFeelingsHash)
             console.log(userTotalSentChargeHash)
@@ -51,19 +60,13 @@ class LeadersContainer extends React.Component {
 
             let combinedHash = {}
             Object.keys(userFeelingsHash).forEach(function (el) {
-                console.log(el); // key
-                console.log(userFeelingsHash[el]); // value
                 combinedHash[el] = [userFeelingsHash[el]]
             });
             Object.keys(userTotalSentChargeHash).forEach(function (el) {
-                console.log(el); // key
-                console.log(userTotalSentChargeHash[el]); // value
                 let average = combinedHash[el] / userTotalSentChargeHash[el]
                 combinedHash[el] = [average]
             }); 
             Object.keys(userLikeHash).forEach(function (el) {
-                console.log(el); // key
-                console.log(userLikeHash[el]); // value
                 combinedHash[el] = [...combinedHash[el], userLikeHash[el], el]
             });
           
@@ -147,3 +150,5 @@ class LeadersContainer extends React.Component {
 }
 
 export default LeadersContainer 
+
+

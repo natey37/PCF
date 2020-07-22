@@ -25,32 +25,6 @@ import negative1 from '../styling/negative1.png'
 import neutral1 from '../styling/neutral1.png'
 
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       flexGrow: 1,
-//     },
-//     paper: {
-//       backgroundColor: '#FFED87',
-//       padding: theme.spacing(2),
-//       margin: 'auto',
-//       maxWidth: 800,
-//       height: '50vh',
-//       boxShadow: '5px 10px #888888'
-  
-//     },
-//     message: {
-//       // color: '#FFFFFF',
-//       backgroundColor: '#122C34',
-//       padding: theme.spacing(2),
-//       margin: 'auto',
-//       maxWidth: 600,
-//       height: '20vh'
-//     },
-//     text: {
-//         color: '#FFFFFF',
-//         backgroundColor: '#D3D3D3'
-//     }
-// }))
 
 class MessageBoard extends React.Component {
 
@@ -142,9 +116,6 @@ class MessageBoard extends React.Component {
                            })
                        })
                        .then(resp => resp.json()).then(resp => {
-                            console.log(resp.sentcharge.id)
-                            console.log(resp)
-                            console.log(this.props.values)
                             this.makeTags(resp)
                             this.props.reset()
 
@@ -175,10 +146,6 @@ class MessageBoard extends React.Component {
                             })
                         })
                         .then(resp => resp.json()).then(resp => {
-                            // console.log(resp.sentcharge.id)
-                            console.log(resp)
-                            // console.log(this.props.values)
-                        
                             this.makeTags(resp)
                             this.props.reset()
                        })

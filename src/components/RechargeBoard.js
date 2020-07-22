@@ -32,14 +32,10 @@ class RechargeBoard extends React.Component {
            
                 //filter sentcharges that match todays number of month
             let filteredResps = newResps.filter(sentcharge => sentcharge.created_at === thisDateDay && sentcharge.user_id !== parseInt(localStorage.user_id))
-           
-                // if(this.state.tags.length > 0 ){
-
-                // }
-              console.log(filteredResps)
+            
+            //if there has been a response take one randomly else give message
             if(filteredResps.length > 0 ){
                 let todaysMessage = this.sample(filteredResps)
-                console.log(todaysMessage)
                 this.setState({
                     todaysMessage: todaysMessage.message,
                     filteredResps: filteredResps
@@ -53,95 +49,45 @@ class RechargeBoard extends React.Component {
             
         })
     }
-
+    //if they add a tag
     handleValuesChange = (event, value) => {
-        console.log(event.target)
-        console.log(value)
         let values = value.map(val => val.tag)
-        console.log(values)
+        //add the tag to the tags state
         values.map(value => {
             this.setState({
                 tags: [...this.state.tags, value]
             }, () => {
-                let matchedTags = this.state.filteredResps.filter(sentcharge => sentcharge.chargetags.length > 0)
+                // let matchedTags = this.state.filteredResps.filter(sentcharge => sentcharge.chargetags.length > 0)
+                
+                //map the responses associated tags
                 let sentchargeTags = this.state.filteredResps.map(sentcharge => sentcharge.chargetags)
+                console.log(sentchargeTags)
+                //filter the responses with tags
                 let nonEmptySentChargeTags = sentchargeTags.filter(arr => arr.length > 0)
                 let matching = []
+                //if the tags they selected are in included in the reponses tags then put it in matching
                 let mapForMatchingTags = nonEmptySentChargeTags.forEach( arr => {
-                    console.log(arr)
                     arr.forEach(chargetag => {
-                        console.log(chargetag)
-                        console.log(chargetag.tagtype)
-                        console.log(this.state.tags)
                         if(this.state.tags.includes(chargetag.tagtype)){
-                            console.log("got inside")
                             matching.push(chargetag)
                         }
                     })
                 })
+                //get the response ids
                 let matchingIDs = matching.map(chargetag => chargetag.sentcharge_id)
+                //filter to make sure its not written by this user
                 let matchingSentCharge = this.state.filteredResps.filter(sentcharge => 
                     matchingIDs.includes(sentcharge.id))
+                    //choose a random response and set in state
                 if(matchingSentCharge.length > 0){
                     let newMessage = this.sample(matchingSentCharge).message
                     this.setState({
                         todaysMessage: newMessage
                     })
-                    console.log(newMessage)
-
-                    // this.setState({
-                    //     todaysMessage: this.sample(matchingSentCharge).message
-                    // })
-                    // console.log(matchedTags)
-                    // console.log(sentchargeTags)
-                    
                 }
-                console.log(nonEmptySentChargeTags)
-                    // console.log(mapForMatchingTags)
-                    console.log(matching)
-                    console.log(matchingIDs)
-                    console.log(this.state.filteredResps)
-                    console.log(matchingSentCharge)
-                    console.log(this.state.todaysMessage)
-               
-
             })
         })
-        
        
-        
-
-      
-        // let matchedTags = this.state.filteredResps.filter(sentcharge => {
-        //     console.log(sentcharge.chargetags)
-        //     if(this.state.tags.length === 0){
-        //         console.log('HI im in first conditional')
-        //         return sentcharge
-                
-        //     } else if (this.state.tags.length > 0 && !sentcharge.chargetags){
-        //         console.log('HI im in second conditional')
-
-        //         return sentcharge
-        //     } else {
-        //         let types = sentcharge.chargetags.map(tag => tag.type)
-        //         console.log('HI im in third conditional')
-
-        //         console.log(types)
-        //         console.log(sentcharge)
-        //         console.log(sentcharge.chargetags)
-        //         types.forEach((type) => {
-        //             if(this.state.tags.includes(type)){
-        //                 return sentcharge
-        //             }
-        //         })
-        //     }
-            // console.log(matchedTags)
-        
-       
-    }
-
-    matchTags = () => {
-
     }
 
 
@@ -185,7 +131,6 @@ class RechargeBoard extends React.Component {
         })
     }
     render(){
-        // console.log(this.state.tags)
         const  paper= {
             backgroundColor: 'rgba(255, 237, 135, 1)',
             margin: 'auto',
@@ -298,43 +243,7 @@ class RechargeBoard extends React.Component {
                         <br></br>
                         <br></br>
                         <div>
-                            {/* <h3 style={{color: 'white', fontFamily: 'Noto Sans' + "sans-serif"}}>If that helped give you the recharge you needed, press the charge button!
-                            </h3>
-                    {!this.state.background ? 
-                        <Button
-                        onClick={this.handleBothClicks}
-                        variant="contained"
-                        color="primary"
-                        style={chargeButton}
-                                
-                    >
-                        {this.state.charge ? 
-                        <div> Charge: 1  
-                            <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                        </div>
-                        :<div>
-                            <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                            Charge
-                        </div>}
-                        </Button>
-                    :
-                        <Button
-                            onClick={this.handleBothClicks}
-                            variant="contained"
-                            color="primary"
-                            style={button1}
-                                    
-                        >
-                            {this.state.charge ? 
-                            <div> Charge: 1  
-                                <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                            </div>
-                            :<div>
-                                <img src={charge} style={{height: '15px', width: '15px'}}></img>
-                                Charge
-                            </div>}
-                        </Button>
-                    } */}
+                            
                             
                         </div>
                             <br></br>
